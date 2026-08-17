@@ -1,0 +1,13 @@
+# RDS in a Private Tier
+
+## What this lab builds
+
+
+## Steps taken
+
+
+## What broke (and why)
+
+
+## What I learned
+
