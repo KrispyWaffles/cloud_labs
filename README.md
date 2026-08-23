@@ -35,6 +35,34 @@ impressive on its own.
 Each lab folder has its own README covering: what was built, the steps taken, what
 broke (if anything) and why, and what it taught.
 
+## Incidents
+
+**2026-08-22 — leftover billable infrastructure from an earlier project.** While
+working through lab 01's second independent rebuild, a routine check of the AWS
+billing dashboard turned up a live EC2 instance and RDS database that had been
+running continuously for 11 days — leftovers from one of the earlier exploration
+projects mentioned above (the Terraform-provisioned app), forgotten and never torn
+down after that project wrapped. Total damage: over $100 in charges for
+infrastructure that wasn't part of any active learning.
+
+The account did have a budget alert configured to catch exactly this ($1 threshold,
+notify on any spend over $0.01, sent to an address I do actively check) — and it
+worked. It fired on July 22. I saw it and didn't stay on top of it. The alert did its
+job; the follow-through didn't.
+
+What changed as a result:
+- Identified and terminated the leftover EC2 instance and RDS database, and cleaned
+  up the empty S3 buckets tied to the same project.
+- Added a mandatory end-of-session check to the lab workflow: verify nothing billable
+  is still running before closing out any session that touched EC2, RDS, or NAT
+  Gateway resources. This doesn't depend on remembering to check an alert — it's a
+  scripted step at the end of every session that touches billable infrastructure.
+
+Costly lesson, but a real one: tutorials don't usually make you find and kill an
+actual cost leak under time pressure. This is documented here because it happened,
+not because it's flattering — deliberate practice includes the mistakes, not just the
+clean labs.
+
 ## Exit check
 
 Can I draw and build a VPC with public/private subnets from memory, and explain it to

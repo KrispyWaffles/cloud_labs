@@ -120,6 +120,64 @@ Format:
 If you clearly don't know an answer, Claude says so plainly as part of the feedback
 rather than softening it — the grade is only useful if it's honest.
 
+## Independent runs (run-2, run-3, ...)
+
+Once a lab's first rep is done (Demo/Rebuild pass + README written), you can come back
+later and do it again, further independently, as many times as you want. Each repeat
+lives in its own folder inside the lab directory: `01-vpc-basics/run-2/`,
+`run-3/`, etc. Whether a lab gets a `run-2` at all, and whether it needs a `run-3`
+after that, is your call based on how the previous run's grade and feedback looked —
+Claude doesn't ask you to schedule more than you want.
+
+This is a stricter, more independent rep than the Rebuild pass, and it's graded
+differently — not a live Q&A, but an evidence review:
+
+1. **Start clean.** Tear down the prior build for that lab first (same reverse-order
+   teardown as any Rebuild pass) so the run is a real from-scratch attempt, not a
+   continuation.
+2. **Claude generates the run folder** with a `README.md` template containing:
+   - An **evidence checklist** — the specific screenshots that prove the lab was built
+     correctly (e.g. the VPC's CIDR, the subnet list, the route table's routes, the
+     subnet associations) — tailored to what that lab actually needs to demonstrate.
+   - A **self-answered question set** (similar spirit to the after-lab README Q&A, but
+     you write the answers yourself into the file rather than answering interactively).
+3. **Claude goes quiet during the run.** No proactive hints, no check-ins — this run is
+   meant to be done with less real-time support than the Rebuild pass. If you hit a
+   real blocker, you can still ask (pure tooling friction still skips to a direct
+   answer per the hint ladder), but the default is silence until you say you're done.
+4. **You fill in the evidence and answers yourself** — screenshots go in
+   `run-N/images/`, written answers go directly into `run-N/README.md`.
+5. **Submit for review.** Once you say it's done, Claude reviews the screenshots and
+   answers together as a whole (not question-by-question) and gives a grade + honest
+   feedback, same standard as the after-lab Q&A — grading understanding, not prose.
+6. Based on that grade and feedback, decide together whether to close out the lab or
+   queue up another run.
+
+## Cost safety (added after the 2026-08-22 billing incident)
+
+See the README's "Incidents" section for the full story: leftover EC2/RDS from an
+earlier project ran unnoticed for 11 days and cost over $100. The budget alert
+worked correctly and fired on July 22 — the gap was follow-through, not tooling. The
+fix is a scripted end-of-session step that doesn't depend on remembering to check an
+alert, not a smarter alert.
+
+- **End-of-session check, mandatory for any lab touching EC2, RDS, or NAT Gateway:**
+  before closing out a session, verify via CLI or console that nothing billable was
+  left running — not just the resources built that session, but a quick account-wide
+  sanity check (`describe-instances`, `describe-db-instances`, `describe-nat-gateways`
+  filtered to running/available states). This applies whether the resources were torn
+  down as part of the lab or not — confirm, don't assume.
+- **Every lab that launches EC2/RDS/NAT Gateway ends with an explicit teardown step**
+  as part of the lab plan itself, not an afterthought — see lab 02's plan for the
+  pattern (terminate, then verify via CLI the state actually shows terminated/gone).
+- **Claude offers the end-of-session check proactively**, not just when asked — this
+  is standing practice for any session that touched EC2/RDS/NAT Gateway, per the
+  user's explicit request on 2026-08-23.
+- Claude does not have standing permission to run destructive AWS actions (terminate,
+  delete) even when asked directly — those get blocked by the harness's own safety
+  classifier regardless of confirmation. Expect to run destructive cleanup commands
+  yourself, with Claude providing the exact commands/console steps.
+
 ## When Claude should just do more
 
 It's fine to ask for more help — that's the 20%. Good reasons to shift up the ladder
