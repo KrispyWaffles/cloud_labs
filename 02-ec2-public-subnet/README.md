@@ -12,10 +12,6 @@ callback to the CIDR math from lab 01's drilling.
 
 ## Steps taken
 
-*(Demo pass and a guided console walkthrough are done below. The independent build —
-Rebuild pass, unaided — is planned for the next session; final "What broke" and "What
-I learned" get filled in from that pass, per the usual process.)*
-
 **Demo pass (CLI), 2026-08-30:**
 1. Verified the account was clean (no running EC2/RDS) before starting.
 2. Created security group `lab02-ec2-sg` in `run02x-vpc` — inbound rule: SSH (22)
@@ -51,9 +47,31 @@ Console instead of CLI, step by step.
 - Torn down again afterward (terminate instance → delete security group), verified
   clean via CLI.
 
+**Independent build (Rebuild pass, unaided), 2026-09-01:** built from memory —
+security group, launch, SSH connect — using earlier passes in this README as
+reference material rather than a fresh checklist. Verified correct via CLI before
+teardown: right VPC/subnet, right key pair, security group scoped to exactly one
+`/32`. Torn down and confirmed clean afterward, same as the prior two passes.
+
 ## What broke (and why)
 
-
+Hit an SSH connection error caused by a typo in the command. While troubleshooting,
+started creating a second key pair and tried to get it attached to the already-
+running instance — that doesn't actually work, since an EC2 instance's key pair is
+fixed at launch time and can't be swapped afterward through normal means (the real
+workarounds — injecting a new public key via user-data, EC2 Instance Connect, manual
+edits from inside the OS — are all more advanced than anything needed here). Went
+back to the original key pair, compared the SSH command against an earlier working
+version, found the typo, and connected successfully — without asking for help on it,
+even though I almost did.
 
 ## What I learned
 
+Security groups being a separate, instance-level gate from lab 01's subnet-level
+routing is clearer now, and launching an EC2 instance feels more familiar than it
+did. Understanding is coming slowly rather than all at once, and it's still a little
+fuzzy without more to react against — specifically, I've only seen the success case
+so far (security group correctly configured, connection works), not the failure case
+(security group missing the rule, connection actually gets rejected). Seeing that
+rejected-connection case side by side with the working one would probably complete
+the picture better than more successful runs will.
