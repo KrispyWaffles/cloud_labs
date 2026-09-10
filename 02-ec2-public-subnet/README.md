@@ -53,6 +53,19 @@ reference material rather than a fresh checklist. Verified correct via CLI befor
 teardown: right VPC/subnet, right key pair, security group scoped to exactly one
 `/32`. Torn down and confirmed clean afterward, same as the prior two passes.
 
+**Reject/timeout side quest, 2026-09-09:** after a quick warm-up rebuild + teardown
+for review, built one more instance — same pattern, but this time attached to a
+security group with **no inbound rule at all**, specifically to see the failure case
+instead of only the success case.
+
+![SSH attempt against the ruleless security group, hanging then timing out](images/Opration_Timeout.png)
+
+- Attempted SSH against it: no fingerprint prompt, no response of any kind — just a
+  multi-minute delay, then `Operation timed out`.
+- Added the SSH rule back to the same security group, tried again: connected
+  immediately, ran the same `curl` outbound check as before.
+- Torn down (instance → security group), verified clean via CLI.
+
 ## What broke (and why)
 
 Hit an SSH connection error caused by a typo in the command. While troubleshooting,
@@ -75,3 +88,12 @@ so far (security group correctly configured, connection works), not the failure 
 (security group missing the rule, connection actually gets rejected). Seeing that
 rejected-connection case side by side with the working one would probably complete
 the picture better than more successful runs will.
+
+**Follow-up, after the reject/timeout side quest:** it clicked once I actually saw
+it — the blocked attempt tries to establish a connection, gets no response because
+the security group just drops the packets, and there's no "connection refused"
+notification, only a timeout after waiting. So the practical takeaway for real
+troubleshooting going forward: if an SSH connection ever hangs and times out instead
+of failing immediately, the first thing to go check is the **security group's
+inbound rules** — that delay-then-timeout pattern specifically points at something
+being silently blocked, not an application-level problem.
