@@ -63,6 +63,27 @@ actual cost leak under time pressure. This is documented here because it happene
 not because it's flattering — deliberate practice includes the mistakes, not just the
 clean labs.
 
+**2026-10-06 — console sign-in blocked by a single point of failure in MFA.** Partway
+through a lab 03 session, AWS console sign-in started failing repeatedly. The prompt
+was a cross-device passkey handshake ("On both devices, check your internet connection
+and turn on Bluetooth"), and it never completed, so I had no way past the login screen
+using that method. I got back in by choosing a different authentication method, and
+only because a second one was already set up.
+
+The takeaway is about resilience, not the specific error: if one MFA method is the only
+way in, then a dead Bluetooth link, a lost or reset phone, or a broken browser/OS
+passkey flow locks you out of your own account. What I'm taking from it:
+- Register more than one independent MFA method (e.g. an authenticator app *and* a
+  passkey/hardware key), so no single device or transport is required to sign in.
+- Know which fallback works before it's needed, not while locked out.
+- The CLI access keys are a separate path and kept working throughout, which is useful
+  for checking billable resources, but it is not a substitute for console access.
+
+Same session, a related catch: a NAT Gateway (`lab03-nat`) from an earlier lab 03
+attempt was still running four days later, found by the account-wide end-of-session
+sweep. Caught for about $4, but it's the same class of mistake as the August incident,
+and the same fix applies: run the sweep, don't rely on remembering.
+
 ## Exit check
 
 Can I draw and build a VPC with public/private subnets from memory, and explain it to

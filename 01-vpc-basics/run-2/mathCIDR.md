@@ -30,10 +30,58 @@ those bits are **locked** as the network/identity part — the rest are free.
 already claimed by another subnet in that VPC. Nothing about `0` specifically is
 special — it's only "correct" when nothing else already occupies it.
 
+## Finding the exact range for any prefix
+
+Works for any prefix, not just clean `/8`, `/16`, `/24` boundaries — the full chain,
+in order:
+
+1. **Full octets locked** = prefix ÷ 8 (whole-number part).
+2. **Remainder** = prefix mod 8 → bits locked in the *next* (partially-locked) octet.
+   - **Calculator trap:** if the division gives a decimal (e.g. `20 ÷ 8 = 2.5`), the
+     digits after the decimal point are *not* the remainder. Multiply the decimal
+     part by 8 instead: `0.5 × 8 = 4`. (`2.5` does not mean "remainder 5.")
+3. **Free bits in that octet** = `8 − remainder`.
+4. **Step size** = `2^(free bits in that octet)` — valid starting values in that
+   octet are multiples of the step size.
+5. **Binary check**: write the given octet value in binary, split into locked/free
+   bits, confirm the free bits ranging from all-`0` to all-`1` land on the expected
+   numbers.
+6. **Range** = given start through `(start + step − 1)` for that octet, then `.0`
+   through `.255` for every fully-free octet after it.
+   - **Common mistake:** the top of the range is `start + step − 1`, *not*
+     `start + step` — counting `n` values from a starting point lands on
+     `start + (n − 1)`.
+
+**Sanity check, every time:** total free bits (`32 − prefix`) should equal (free bits
+in the partially-locked octet) + (`8 ×` number of fully-free octets after it). If it
+doesn't match, one of the earlier steps is wrong — go back and find it before trusting
+the answer.
+
+**Worked example, `172.16.50.128/25`:**
+- `25 ÷ 8 = 3` remainder `1` → 3 full octets locked, 1 bit locked in the 4th octet.
+- Free bits in 4th octet = `8 − 1 = 7` → step size `2^7 = 128`.
+- `128` in binary has the 1 locked bit set to `1`; free bits `0000000`–`1111111` →
+  range `128`–`255`.
+- Sanity check: `32 − 25 = 7` = `7 + (8 × 0)` ✓ (nothing after the 4th octet).
+- Range: **`172.16.50.128` – `172.16.50.255`**.
+
 ## Overlap: always check the actual range, not the slash number
 
 Two blocks overlap if their **address ranges intersect** — never judge it by how
-similar or different the prefix numbers look.
+similar or different the prefix numbers look. Once you have both ranges (using the
+method above), just line them up:
+
+```
+/26:   .64 ──── .127
+/25:                .128 ──────────────── .255      → no overlap (adjacent, not shared)
+
+/26:                          .192 ──────── .255
+/25:        .128 ────────────────────────── .255     → overlap (fully contained)
+```
+
+Same prefix sizes, same base network (`10.20.30.x`) — only the starting octet moved,
+and that alone flipped it from separate to fully contained. Overlap is entirely about
+where the ranges land, never about how similar the prefix numbers look.
 
 **The `/23` trap:** a `/23` spans **two consecutive `/24` blocks** (an even/odd pair).
 `10.0.4.0/23` = `10.0.4.0/24` + `10.0.5.0/24` combined (`10.0.4.0`–`10.0.5.255`). So
