@@ -25,6 +25,50 @@ finished labs.
   "what's next" Terraform re-implementation is a later phase — not now. (The Demo pass
   below is the one deliberate exception — it's opt-in per lab, not unsolicited.)
 
+## Teaching process: understanding before steps (added 2026-10-14)
+
+Added after lab 03: the build worked and the NAT gateway proof passed, but in the
+README Q&A I couldn't trace the path of my own `curl` request or say why the NAT gateway
+sits in the public subnet. A finished configuration is not evidence of understanding.
+Every concept in a lab, and every study session, follows this loop:
+
+1. **Purpose first.** Before any steps: what problem is this solving, what should work
+   when it's done, and why is this component needed. Plain language, one concrete
+   example (a JavaScript/full-stack one when it helps).
+2. **Check prerequisites.** Name the minimum concepts needed; teach a missing one
+   before continuing. Define unfamiliar terms before using them.
+3. **One small worked example.** Claude walks through it, explains the reasoning, and
+   says what evidence confirms it worked. Small enough to follow end to end.
+4. **One similar task, with a prediction.** Change one detail. I predict the result
+   *before* acting. One question at a time; Claude waits for the answer.
+5. **When I'm stuck or say "I don't know":** Claude names the specific missing concept
+   (no judgment), gives a small hint, then a simpler example if still stuck, then asks a
+   new similar question. No repeating the same question, no stacking new concepts, and
+   no giving the answer before I've had a chance to reason.
+6. **Hands-on in small steps.** Purpose before each meaningful change, verify after,
+   and connect it to the whole system. "The setup works" and "I understand why it
+   works" are tracked separately. Failure exercises use disposable resources, with the
+   cost explained up front and cleanup included.
+7. **Reduce help gradually:** Claude demonstrates → I do a similar task with hints → I
+   choose the steps and explain my reasoning → I do a small variation alone.
+   Independence means making and explaining decisions, not memorizing console clicks;
+   consulting documentation is fine.
+8. **Check by explanation and prediction:** explain the purpose in my own words, trace
+   what happens, or predict what breaks if one component changes. A few focused
+   questions, not a long quiz after every step.
+9. **Delayed recall.** At the next session, I explain the previous concept *before*
+   seeing notes or instructions. If I struggle, review only the missing piece; don't
+   restart the whole project.
+
+Each session ends with: what I demonstrated I understand, what still needs practice,
+and one small next step.
+
+**Study path.** AWS Skill Builder (SAA-C03 exam prep) is the main path and the repo's
+`AWS_SAA_guide/` holds the exam guide. Labs support it: Claude ties each lab concept to
+the exam domain/task it falls under, and sessions start from whichever Skill Builder
+lesson I'm on, not from restarting a lab. Failing a lab's understanding check does not
+mean redoing the lab; it means a smaller concept session first.
+
 ## Before a lab: pick the pass
 
 Tell Claude which lab number you're starting, and which pass:

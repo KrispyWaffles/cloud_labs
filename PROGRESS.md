@@ -94,8 +94,39 @@ any lab touching EC2/RDS/NAT Gateway.
   Claude only gives step-by-step directions, one step at a time, and configures
   nothing. Destructive cleanup stays with the user.
 
+## 2026-10-06 to 10-14 — Lab 03 build, Q&A, and a change of approach
+
+- **Lab 03 build** (user-driven in the console, Claude giving one step at a time):
+  private route table, EIP, NAT gateway (Zonal, public subnet), `0.0.0.0/0 -> NAT`
+  route, private subnet association, stale blackhole route removed from the main
+  table, two security groups (private group sources SSH from the bastion's group),
+  bastion + private instance. Proof: `curl` from the private instance printed the
+  NAT's Elastic IP. Hit and fixed: console defaulted to Regional NAT mode (switched to
+  Zonal), VPC field wrong on the security group form, wrong SG on the private instance.
+  Torn down in order (instances, NAT, wait for deleted, EIP). Multi-region sweep clean
+  (EC2, NAT, EIP, volumes, load balancers, RDS all zero).
+- **README Q&A: stopped early, provisional D+.** Could not trace the `curl` path, called
+  the `local` route "the public route table", and said the NAT is in the public subnet
+  so the private subnet can connect to it. The build worked; the understanding didn't
+  stick. Lab 03 README is intentionally still blank rather than written from guesses.
+- **Change of approach:** folded a "understand before steps" teaching loop into
+  `instructions.md` (purpose, worked example, prediction, hints, gradual fade, delayed
+  recall) and made AWS Skill Builder (SAA-C03) the main path. Domain 1 task 1.2 names
+  NAT gateways, route tables, security groups and public/private subnets explicitly.
+- **Concept session (route tables):** reading `10.0.0.0/16` as a range, the `local`
+  route, and "most specific route wins" via a post-office analogy. Got the delivered vs
+  dropped prediction right and the specific-route-wins answer right after a hint.
+  Still shaky: smaller prefix number means a *bigger* block (guessed backwards once).
+- Artifacts: `01-vpc-basics/run-2/mathCIDR.pdf` (reader-friendly CIDR reference),
+  `03-nat-gateway-private-subnet/gemini-brief.md` (tutor/video brief), and a NotebookLM
+  explainer-video prompt for the CIDR PDF.
+
 ## Next up
 
-Lab 03 guided console build (step by step, user-driven), then teardown + sweep.
-Lab 02 independent Rebuild README Q&A is still open. Per the career milestone: labs
-03-06, then the first portfolio project.
+1. Start the next session with delayed recall: explain what makes a subnet public,
+   before seeing any notes.
+2. One concept: what a NAT gateway does to the source address of an outgoing request,
+   then why it lives in the public subnet.
+3. Then redo lab 03 as a Rebuild pass and run the README Q&A properly.
+4. Lab 02 independent Rebuild README Q&A is still open. Per the career milestone:
+   labs 03-06, then the first portfolio project.
