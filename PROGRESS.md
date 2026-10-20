@@ -121,8 +121,49 @@ any lab touching EC2/RDS/NAT Gateway.
   `03-nat-gateway-private-subnet/gemini-brief.md` (tutor/video brief), and a NotebookLM
   explainer-video prompt for the CIDR PDF.
 
+## 2026-10-15 — Course workflow v2 (Percipio)
+
+- **Correction:** the course is the employer's **Skillsoft Percipio** SAA-C03 path, not
+  AWS Skill Builder (earlier entries above and the 2026-10-14 workflow assumed Skill
+  Builder; left as written as history). Exam date set: **2026-11-20**. Listed course
+  duration 32 h 35 min (21 courses = 30 h 25 min, plus 3 other items = 2 h 10 min),
+  which is video time, not total study time.
+- Reworked `AWS_Course/WORKFLOW.md`, `WORKFLOW-SUMMARY.md`, `log.md` and the pointer in
+  `instructions.md`: plan each module once into blocks of ~3 videos, one-line
+  acknowledgement per pasted transcript, one combined summary and worked example, five
+  scenario questions with answer plus reason, bounded remediation, one 10 to 15 minute
+  exercise per block, learner-written reflection, confirmed logging, and separate
+  tracking of assisted vs independent work. Provisional first-pass target Nov 7 to 10.
+- Preserved: CLF-C02 template, the 9 seeded revisit items, lab folders and READMEs, and
+  the cost-safety and permission rules. No scores or blocks logged yet, and no AWS
+  resources were created.
+- The Domain 1 review transcript pasted on 2026-10-14 is parked (not processed, not
+  logged, raw text not saved).
+
+## 2026-10-18 to 10-19 — Percipio M01-B01 (global infrastructure, HA, shared responsibility)
+
+- Planned module M01 (Architecture & the Well-Architected Framework) into two blocks.
+  Ran block M01-B01 with the new per-video check added to the workflow (recall in 1 to 3
+  sentences, then one purpose question per video).
+- **First-attempt quiz: 2/5** (single-answer 2/3, multi-select 0/2). Solid: HA vs fault
+  tolerance, key separation with KMS. Missed: Region choice (confused edge locations
+  with Region latency), shared responsibility by service (EC2 guest OS is the
+  customer's), and matching redundancy to the failure domain (same-AZ N+1 doesn't
+  survive an AZ outage). Pattern: picked options that sound like good practice without
+  checking the scenario's decisive requirement.
+- **Exercise (extension of lab 01):** read the AZ column for `run02x-vpc` (both subnets
+  in us-east-1a, a single point of failure), predicted the impact of an AZ outage,
+  created and deleted a us-east-1b subnet. All-region sweep clean afterwards. Learned
+  that a subnet is one AZ, a VPC spans several, and subnet CIDRs can't overlap within a
+  VPC even across AZs. Still shaky on why; kept on the revisit list.
+- Logged in `AWS_Course/log.md` (four new revisit items, two updated). Time spent not
+  recorded.
+
 ## Next up
 
+0. M01-B02 (Well-Architected Framework Fundamentals, Documenting a Workload with the
+   Well-Architected Tool, Turning Requirements into Architecture Decisions, Course
+   Summary). Record time spent this time to start estimating pace.
 1. Start the next session with delayed recall: explain what makes a subnet public,
    before seeing any notes.
 2. One concept: what a NAT gateway does to the source address of an outgoing request,

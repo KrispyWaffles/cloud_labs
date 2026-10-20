@@ -63,11 +63,23 @@ Every concept in a lab, and every study session, follows this loop:
 Each session ends with: what I demonstrated I understand, what still needs practice,
 and one small next step.
 
-**Study path.** AWS Skill Builder (SAA-C03 exam prep) is the main path and the repo's
-`AWS_SAA_guide/` holds the exam guide. Labs support it: Claude ties each lab concept to
-the exam domain/task it falls under, and sessions start from whichever Skill Builder
-lesson I'm on, not from restarting a lab. Failing a lab's understanding check does not
-mean redoing the lab; it means a smaller concept session first.
+**Study path.** The main path is the employer's **Skillsoft Percipio** SAA-C03 course
+(corrected 2026-10-15; earlier notes said AWS Skill Builder). The exam is **2026-11-20**.
+The local exam guide is in `AWS_Course/AWS_SAA_guide/`. Labs support the course: Claude
+ties each exercise to the exam domain/task it falls under only where the guide supports
+it, and sessions start from the Percipio block I'm on, not from restarting a lab. Failing
+a lab's understanding check does not mean redoing the lab; it means a smaller concept
+session first.
+
+**Course sessions.** Follow `AWS_Course/WORKFLOW.md` (source of truth) and read the
+revisit list in `AWS_Course/log.md` at the start of a course session. In short: plan each
+module once into blocks of ~3 videos; acknowledge each pasted transcript in one line, then run a
+~2-minute per-video check (what did I learn in 1 to 3 sentences, then one "what problem
+does X solve" question; no summary or quiz yet); when I say the block is complete run recall (at most one question) ->
+combined summary with a worked example -> five scenario questions -> bounded remediation
+-> **one** 10 to 15 minute exercise -> my own reflection -> confirmed logging. Labs always
+live in the repo root as numbered folders, never under `AWS_Course/`. `LAB.md` is Claude's
+instructions; a lab's `README.md` stays in my own words and Claude does not write it.
 
 ## Before a lab: pick the pass
 
