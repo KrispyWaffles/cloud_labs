@@ -162,8 +162,8 @@ from evidence -> **learner explains** -> clean up.
 | **Verified** | The result was confirmed from real evidence (CLI output, console, test) |
 | **Independently explained** | The learner explained why it works, unaided, including at a later recall |
 
-- **Logging approval:** ask **once, consolidated**, at the end of a block or session. One
-  request covers the block result, exercise status, revisit changes, time, and resume point.
+- **Logging approval:** ask **once, consolidated**, at the end of a block or session, after the
+  study notes. One request covers the block result, exercise status, revisit changes, time, and resume point.
   Don't ask repeatedly. Nothing is written without a yes.
 - **Revisit statuses** are unchanged (Open, Reviewing, Solid; Solid needs two clean recalls on
   different days with no hints). Never claim later-day understanding unless it happened.
@@ -191,6 +191,26 @@ empty commits, no artificial activity, and no unrelated changes in the commit.
 safety"**: specific files only, staged-diff review, screenshot review, secret scan, outgoing
 range check, and a report. The local pre-push hook supplements these checks. If a check can't
 run or finds something, stop and explain.
+
+## 6.5 Study notes (the final step of the block review)
+
+After the reflection and before the logging request, Claude writes **one set of study notes
+for the block**, for the learner to paste into a Google Doc and use for reference and review.
+
+- **Copy-friendly:** plain headings and bullets, no wide tables, no code fences, nothing that
+  only renders in one viewer. Acronyms expanded on first use.
+- **Organized the same way every time:** the big idea; key terms; the main concept sections for
+  this block; comparisons as short bullets; decision rules (requirements lead to choices, not
+  keyword tricks); mistakes to watch for (the learner's own misses from this block); and 3 to 4
+  recall prompts. Not a flashcard system.
+- **Detailed but simple:** solid detail, short sentences, one concrete example.
+- **Original wording only.** Never paste transcript text. Label supplemental content as such.
+  Include the learner's own verified observations (for example, what their console showed).
+- **Delivered in chat, and saved as `AWS_Course/notes/<block id>.md`** so it can be reopened
+  and copied later. Saving is a normal file change: it is committed only after the safety
+  checks, and only when the learner says to commit.
+- Google Docs tip: copy from a rendered view (chat or the editor's Markdown preview) and paste.
+  If the pasted text shows raw symbols, use Docs' Markdown paste or detection setting.
 
 ## 7. Scope control
 

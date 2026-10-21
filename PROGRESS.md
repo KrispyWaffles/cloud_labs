@@ -177,11 +177,26 @@ any lab touching EC2/RDS/NAT Gateway.
   secret scan has run yet. Already-tracked files that match ignore rules: `.DS_Store` (three
   copies). Install with `brew install gitleaks`.
 
+## 2026-10-20 to 10-21 — Udemy S03-B01 (Getting started with AWS)
+
+- First Udemy block: Section 3, 3 lectures, 13 min (one video skipped as administrative).
+  Per-video checks, combined summary, five scenario questions: **5/5 first attempt**, no guesses.
+  Caveat: a repeat topic from Percipio M01-B01, so a strong result was expected.
+- Practical: console tour as a predict-then-check task. Predicted Lambda global and IAM
+  regional; the console showed the opposite (new revisit item #14). Saw first-hand that
+  VPCs are regional (invisible in Ohio, back in N. Virginia).
+- Revisit items #10 (Region choice vs edge) and #12 (redundancy vs failure domain) moved to
+  Reviewing after correct first attempts; #14 added. Independent explanation still pending a
+  later recall.
+- Time: about 30 to 40 min, estimated and not timed. Playback 1.25x worked best.
+- Added the **study notes** step to the workflow (copy-friendly notes for Google Docs, saved in
+  `AWS_Course/notes/`). First set: `AWS_Course/notes/S03-B01.md`.
+
 ## Next up
 
-0. Install gitleaks (`brew install gitleaks`) and run the first real scan before the next
-   push. Then share the first Udemy section's expanded screenshot so its blocks can be
-   planned. (The old Percipio M01-B02 note no longer applies; that block was never started.)
+0. Next Udemy section: send its expanded screenshot (the course list shows IAM & AWS CLI after
+   this one) so its blocks can be planned. Time that block with a phone timer. Set the console's
+   default Region to N. Virginia.
 1. Start the next session with delayed recall: explain what makes a subnet public,
    before seeing any notes.
 2. One concept: what a NAT gateway does to the source address of an outgoing request,

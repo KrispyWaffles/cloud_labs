@@ -65,10 +65,13 @@ under `AWS_Course/`. Raw course transcripts are never stored in the repo.
  One practical application (a relevant Udemy hands-on lesson can count)
       |
       v
- Your explanation in your own words -> documented -> commit after the safety checks
+ Your explanation in your own words -> documented
       |
       v
- One consolidated logging request  ->  next session starts with a short recall check
+ Study notes: copy-friendly, for Google Docs (also saved in AWS_Course/notes/)
+      |
+      v
+ One consolidated logging request, then commit after the safety checks  ->  next session starts with a short recall check
 ```
 
 ## 5. Step by step
@@ -125,6 +128,14 @@ evidence, what you understood in your own words, guided or independent, cleanup 
 open questions. Claude doesn't fabricate your reflection or results. When files changed, a
 commit like `lab: complete S03-B02 IAM permissions exercise`, with no empty commits, no
 artificial activity, and no unrelated changes.
+
+### 5.7 Study notes
+The last step of every block review. Claude writes one set of notes in original wording that you
+can paste into a Google Doc: the big idea, key terms, the main concepts, short comparison
+bullets, decision rules, mistakes to watch for (your own misses), and 3 to 4 recall prompts. It
+uses plain headings and bullets with no wide tables or code fences, so it pastes cleanly. It is
+shown in chat and saved as `AWS_Course/notes/<block id>.md`. It is committed only after the
+safety checks and only when you say so. Transcript text is never copied into it.
 
 ## 6. Git protections
 

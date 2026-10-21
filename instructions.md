@@ -80,7 +80,8 @@ current Udemy section into blocks of 3 to 4 related videos; after each instructi
 transcript ask exactly two questions, one at a time (what did I learn in 1 to 3 sentences,
 then one "what problem does X solve"); at block end give a combined summary and five scenario
 questions; every block gets one practical application (a relevant Udemy demo can count);
-document the exercise and commit it only after the safety checks below. Labs always live in
+finish with copy-friendly study notes for Google Docs (saved in `AWS_Course/notes/`); document
+the exercise and commit it only after the safety checks below. Labs always live in
 the repo root as numbered folders, never under `AWS_Course/`. `LAB.md` is Claude's
 instructions; a lab's `README.md` stays in my own words and Claude does not write it. Raw
 course transcripts are never stored in the repo.
