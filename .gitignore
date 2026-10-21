@@ -31,3 +31,6 @@ crash.*.log
 # Third-party course material and course screenshots (copyrighted / employer site name)
 AWS_Course/screenshots/
 AWS_Course/AWS_SAA_guide/
+
+# Generated study-notes Word document (rebuild with: node scripts/build_notes_docx.js)
+AWS_Course/notes/*.docx

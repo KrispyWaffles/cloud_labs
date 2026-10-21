@@ -68,7 +68,7 @@ under `AWS_Course/`. Raw course transcripts are never stored in the repo.
  Your explanation in your own words -> documented
       |
       v
- Study notes: copy-friendly, for Google Docs (also saved in AWS_Course/notes/)
+ Study notes: block .md saved, running Word doc rebuilt (AWS_Course/notes/)
       |
       v
  One consolidated logging request, then commit after the safety checks  ->  next session starts with a short recall check
@@ -130,12 +130,16 @@ commit like `lab: complete S03-B02 IAM permissions exercise`, with no empty comm
 artificial activity, and no unrelated changes.
 
 ### 5.7 Study notes
-The last step of every block review. Claude writes one set of notes in original wording that you
-can paste into a Google Doc: the big idea, key terms, the main concepts, short comparison
-bullets, decision rules, mistakes to watch for (your own misses), and 3 to 4 recall prompts. It
-uses plain headings and bullets with no wide tables or code fences, so it pastes cleanly. It is
-shown in chat and saved as `AWS_Course/notes/<block id>.md`. It is committed only after the
-safety checks and only when you say so. Transcript text is never copied into it.
+The last step of every block review. Claude writes one set of notes in original wording (the big
+idea, key terms, the main concepts, short comparison bullets, decision rules, mistakes to watch
+for from your own misses, and 3 to 4 recall prompts) and saves it as
+`AWS_Course/notes/<block id>.md`. It then rebuilds the running Word document,
+`AWS_Course/notes/SAA-C03-Study-Notes.docx`, from all the block notes: Arial 12 pt, bold headings
+in two larger sizes, real bullets, one section per block in course order. The `.md` files are the
+source of truth, so add your own notes there (or tell Claude); rebuilding overwrites the Word file.
+The `.docx` is generated and git-ignored; the `.md` files and `scripts/build_notes_docx.js` are
+committed, only after the safety checks and only when you say so. Transcript text is never copied
+into the notes.
 
 ## 6. Git protections
 

@@ -197,8 +197,8 @@ run or finds something, stop and explain.
 After the reflection and before the logging request, Claude writes **one set of study notes
 for the block**, for the learner to paste into a Google Doc and use for reference and review.
 
-- **Copy-friendly:** plain headings and bullets, no wide tables, no code fences, nothing that
-  only renders in one viewer. Acronyms expanded on first use.
+- **Simple formatting:** one-level bullets (a bold lead word, then the point), numbered recall
+  prompts, no tables, no code fences, no nested lists. Acronyms expanded on first use.
 - **Organized the same way every time:** the big idea; key terms; the main concept sections for
   this block; comparisons as short bullets; decision rules (requirements lead to choices, not
   keyword tricks); mistakes to watch for (the learner's own misses from this block); and 3 to 4
@@ -206,11 +206,17 @@ for the block**, for the learner to paste into a Google Doc and use for referenc
 - **Detailed but simple:** solid detail, short sentences, one concrete example.
 - **Original wording only.** Never paste transcript text. Label supplemental content as such.
   Include the learner's own verified observations (for example, what their console showed).
-- **Delivered in chat, and saved as `AWS_Course/notes/<block id>.md`** so it can be reopened
-  and copied later. Saving is a normal file change: it is committed only after the safety
-  checks, and only when the learner says to commit.
-- Google Docs tip: copy from a rendered view (chat or the editor's Markdown preview) and paste.
-  If the pasted text shows raw symbols, use Docs' Markdown paste or detection setting.
+- **Two outputs per block:** `AWS_Course/notes/<block id>.md` (the source copy) and the running
+  Word document `AWS_Course/notes/SAA-C03-Study-Notes.docx`, which is rebuilt from all the block
+  `.md` files with `node scripts/build_notes_docx.js` (needs the `docx` npm package). Each block
+  becomes one Heading 1 section, in course order. The notes are also shown in chat.
+- **The `.md` files are the source of truth.** Rebuilding overwrites the `.docx`, so the learner's
+  own additions go in the `.md` (or are sent to Claude), not directly into the Word file. The
+  `.docx` is generated, so it is git-ignored; the `.md` files and the script are committed.
+- **Word format:** Arial 12 pt body, bold headings (Heading 1 at 16 pt, Heading 2 at 14 pt), real
+  bullets and numbered lists, Letter size, page numbers in the footer.
+- A Google Docs-ready `.html` is no longer produced by default; Claude makes one only if asked.
+- Notes files are committed only after the safety checks, and only when the learner says so.
 
 ## 7. Scope control
 
