@@ -1,0 +1,80 @@
+#!/bin/sh
+# Local pre-push guard for cloud_labs.
+#
+# Install on a computer (git does not install hooks for you, and does not version .git/hooks):
+#   cp scripts/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
+#
+# Limits: `git push --no-verify` skips this hook, and it only runs on this computer.
+# It supplements the manual review in instructions.md; it is not a guarantee.
+# It fails closed: a missing scanner, a scanner error, or a finding blocks the push.
+#
+# Images/PDFs in outgoing commits block the push until you have looked at them:
+#   PREPUSH_IMAGES_REVIEWED=1 git push
+
+zero=0000000000000000000000000000000000000000
+fail() { echo "pre-push BLOCKED: $1" >&2; exit 1; }
+
+remote_name="$1"
+safe_url=$(printf '%s' "$2" | sed -E 's#(https?://)[^@/]+@#\1***@#')
+echo "pre-push: destination remote '$remote_name' ($safe_url)"
+
+# --- scanner must exist and support the commands this hook uses -------------------------
+command -v gitleaks >/dev/null 2>&1 || fail "gitleaks is not installed, so outgoing commits cannot be scanned. Install it (for example: brew install gitleaks), then push again."
+gl_version=$(gitleaks version 2>&1) || fail "could not read the gitleaks version"
+gl_help=$(gitleaks git --help 2>&1) || fail "installed gitleaks ($gl_version) has no 'git' subcommand; upgrade it so commit history can be scanned"
+for flag in --log-opts --redact --no-banner; do
+  printf '%s' "$gl_help" | grep -q -- "$flag" || fail "installed gitleaks ($gl_version) does not list $flag for 'gitleaks git'; upgrade or update this hook"
+done
+echo "pre-push: scanner gitleaks $gl_version (default rules; repo config used only if a .gitleaks.toml exists)"
+
+repo_root=$(git rev-parse --show-toplevel) || fail "could not find the repository root"
+checked=0
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ -z "$local_ref" ] && continue
+  [ "$local_sha" = "$zero" ] && fail "this push would delete $remote_ref; deletions need explicit approval"
+  case "$local_ref" in
+    refs/heads/*) ;;
+    *) fail "refusing to push $local_ref; only branches are allowed here, tags and other refs need explicit approval" ;;
+  esac
+
+  if [ "$remote_sha" = "$zero" ]; then
+    log_opts="$local_sha"
+    echo "pre-push: $remote_ref is new on the remote; scanning ALL history reachable from $local_ref"
+  else
+    git cat-file -e "$remote_sha^{commit}" 2>/dev/null || fail "remote tip $remote_sha is not in this clone; run 'git fetch' and re-check what will go out"
+    git merge-base --is-ancestor "$remote_sha" "$local_sha" || fail "$local_ref is not a fast-forward of $remote_ref (history rewrite or divergence); force pushes need explicit approval"
+    log_opts="$remote_sha..$local_sha"
+  fi
+
+  count=$(git rev-list $log_opts | wc -l | tr -d ' ')
+  echo "pre-push: $local_ref -> $remote_ref, $count outgoing commit(s):"
+  git log --format='  %h %s' $log_opts
+  [ "$count" = "0" ] && continue
+
+  echo "pre-push: files in outgoing commits (status, path):"
+  git log --name-status --format= $log_opts | sort -u | sed 's/^/  /'
+
+  bad_names=$(git log --name-only --format= $log_opts | sort -u | grep -i -E '(^|/)(\.env(\..*)?|id_rsa.*|id_ed25519.*|credentials)$|\.(pem|key|p12|pfx|tfstate|tfplan)$|\.tfstate\.|\.tfvars(\.json)?$' || true)
+  [ -n "$bad_names" ] && fail "outgoing commits contain sensitive-looking file names (listed below). Remove them from history before pushing.
+$bad_names"
+
+  media=$(git log --diff-filter=AM --name-only --format= $log_opts | sort -u | grep -i -E '\.(png|jpe?g|gif|webp|heic|pdf)$' || true)
+  if [ -n "$media" ] && [ "$PREPUSH_IMAGES_REVIEWED" != "1" ]; then
+    fail "outgoing commits add or change images/PDFs. A scanner cannot read screenshots. Review each one by eye (account ID, IPs, keys, personal info, copyrighted material), then rerun with PREPUSH_IMAGES_REVIEWED=1 git push
+$media"
+  fi
+
+  echo "pre-push: scanning $count commit(s) with gitleaks (findings are redacted)..."
+  gitleaks git --log-opts="$log_opts" --redact --no-banner "$repo_root"
+  rc=$?
+  [ "$rc" -ne 0 ] && fail "gitleaks exited with status $rc (1 normally means findings; other values are errors). Nothing was pushed. Fix the cause, then re-run."
+
+  now_sha=$(git rev-parse "$local_ref" 2>/dev/null)
+  [ "$now_sha" = "$local_sha" ] || fail "$local_ref moved from $local_sha to $now_sha during the scan; re-run so the scanned commits are the pushed commits"
+  checked=$((checked + 1))
+done
+
+echo "pre-push: PASSED. Checked: destination, fast-forward only, outgoing commits and files, sensitive file names, images/PDFs acknowledged, gitleaks history scan ($checked ref(s))."
+echo "pre-push: not covered: uncommitted files, content inside screenshots, secrets the scanner has no rule for."
+exit 0

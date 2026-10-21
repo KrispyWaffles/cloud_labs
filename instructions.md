@@ -63,23 +63,27 @@ Every concept in a lab, and every study session, follows this loop:
 Each session ends with: what I demonstrated I understand, what still needs practice,
 and one small next step.
 
-**Study path.** The main path is the employer's **Skillsoft Percipio** SAA-C03 course
-(corrected 2026-10-15; earlier notes said AWS Skill Builder). The exam is **2026-11-20**.
-The local exam guide is in `AWS_Course/AWS_SAA_guide/`. Labs support the course: Claude
-ties each exercise to the exam domain/task it falls under only where the guide supports
-it, and sessions start from the Percipio block I'm on, not from restarting a lab. Failing
-a lab's understanding check does not mean redoing the lab; it means a smaller concept
-session first.
+**Study path.** The main path is now **Stéphane Maarek's Ultimate AWS Certified Solutions
+Architect Associate (SAA-C03) course on Udemy** (switched 2026-10-20). It replaces the
+employer's Skillsoft Percipio course (itself corrected on 2026-10-15 from an earlier note
+that said AWS Skill Builder). The exam is **2026-11-20**, unless I report a change. The local
+exam guide is in `AWS_Course/AWS_SAA_guide/`. Labs support the course: Claude ties each
+exercise to the exam domain/task it falls under only where the guide supports it, and
+sessions start from the Udemy block I'm on, not from restarting a lab. Failing a lab's
+understanding check does not mean redoing the lab; it means a smaller concept session first.
+My JavaScript/full-stack background is a bridge for unfamiliar infrastructure ideas, not a
+reason to build applications.
 
-**Course sessions.** Follow `AWS_Course/WORKFLOW.md` (source of truth) and read the
-revisit list in `AWS_Course/log.md` at the start of a course session. In short: plan each
-module once into blocks of ~3 videos; acknowledge each pasted transcript in one line, then run a
-~2-minute per-video check (what did I learn in 1 to 3 sentences, then one "what problem
-does X solve" question; no summary or quiz yet); when I say the block is complete run recall (at most one question) ->
-combined summary with a worked example -> five scenario questions -> bounded remediation
--> **one** 10 to 15 minute exercise -> my own reflection -> confirmed logging. Labs always
-live in the repo root as numbered folders, never under `AWS_Course/`. `LAB.md` is Claude's
-instructions; a lab's `README.md` stays in my own words and Claude does not write it.
+**Course sessions.** Follow `AWS_Course/WORKFLOW.md` (source of truth) and read the revisit
+list in `AWS_Course/log.md` at the start of a course session. In short: organize only the
+current Udemy section into blocks of 3 to 4 related videos; after each instructional
+transcript ask exactly two questions, one at a time (what did I learn in 1 to 3 sentences,
+then one "what problem does X solve"); at block end give a combined summary and five scenario
+questions; every block gets one practical application (a relevant Udemy demo can count);
+document the exercise and commit it only after the safety checks below. Labs always live in
+the repo root as numbered folders, never under `AWS_Course/`. `LAB.md` is Claude's
+instructions; a lab's `README.md` stays in my own words and Claude does not write it. Raw
+course transcripts are never stored in the repo.
 
 ## Before a lab: pick the pass
 
@@ -208,6 +212,82 @@ differently — not a live Q&A, but an evidence review:
    feedback, same standard as the after-lab Q&A — grading understanding, not prose.
 6. Based on that grade and feedback, decide together whether to close out the lab or
    queue up another run.
+
+## Commit and push safety (added 2026-10-19, extended 2026-10-20)
+
+Added after a push on 2026-10-19 that included a screenshot showing the AWS account ID and
+two copyrighted exam-guide PDFs. Nothing secret went out, but it shouldn't have. Screenshotting
+when stuck is a good habit; the fix is to keep **working** screenshots and **evidence**
+screenshots apart, and to check before anything leaves this computer. `.gitignore` is one
+protective layer, **not a secret detector**.
+
+**Screenshots**
+- Help-me screenshots go in `scratch/` (ignored by git). Copy one into a lab's `images/`
+  folder only when it proves something, and crop out the console header (account ID and
+  name) first. Keep out home IPs, key contents, access keys, passwords, MFA codes, personal
+  information, and course material.
+
+**Permissions (unchanged)**
+- Claude prepares the check and a commit message, and commits only after I say yes to that
+  commit. Claude does not push unless I ask in that moment. I do my own pushes, and the local
+  hook below runs on them. Claude never force-pushes, rewrites history, bypasses hooks,
+  or pushes extra branches or tags without explicit approval.
+
+**Before each commit** (Claude runs these and reports; any failure stops the commit)
+1. Inspect `git status`, changed files, and untracked files.
+2. Confirm `.gitignore` covers credentials, `.env` files, private keys, Terraform state and
+   backups, saved plans, and sensitive generated output.
+3. Check for files already tracked despite ignore rules (`git ls-files -ci --exclude-standard`).
+   Adding an ignore rule does not untrack a file or remove it from history.
+4. Review file contents for AWS keys, session tokens, passwords, API credentials, private
+   keys, personal information, and unintended logs or data.
+5. Inspect screenshots and other binaries by eye where possible. If they can't be inspected,
+   leave them out pending review.
+6. Stage **specific files**; never `git add .` or `git add -A`.
+7. Review the exact staged diff (`git diff --cached`).
+8. Run the secret scanner on the staged content, only with a command the installed version
+   supports (check `gitleaks version` and `--help` first). Report the scanner's version,
+   configuration, scope, and result. If the scanner is missing, errors, or reports an
+   unresolved finding, **stop and explain**. Never skip silently, weaken rules, or suppress
+   findings, and never report a scan that did not run.
+9. Commit the reviewed files only, using explicit paths, with no blanket staging.
+
+**Before each push** (an earlier outgoing commit can hold a secret even if the latest is clean)
+1. Confirm the current branch, destination remote, and refs being pushed (redact any
+   credentials in a remote URL).
+2. Establish the outgoing range against the destination's current state
+   (`git fetch`, then `git log --stat origin/<branch>..HEAD`). For a first push or a new
+   destination, the range is the whole history that will be published.
+3. Review every outgoing commit and file.
+4. Run the secret scanner across **every outgoing commit**, not just the latest.
+5. Check relevant uncommitted files separately; this does not replace the history scan.
+6. Confirm the reviewed commits did not change after scanning.
+7. Report: destination, outgoing commits, changed files, checks performed, scan results,
+   unresolved concerns.
+8. Ask for my approval before pushing.
+
+**Local pre-push hook**
+- `scripts/pre-push` is the reviewable copy. Installed on this computer as
+  `.git/hooks/pre-push` (git does not install hooks for you, and does not version
+  `.git/hooks`, so repeat `cp scripts/pre-push .git/hooks/pre-push && chmod +x
+  .git/hooks/pre-push` on any other computer).
+- It blocks on: a missing or unsupported scanner, any scanner error or finding, non-fast-forward
+  pushes, branch deletions, tags and other refs, sensitive-looking file names in outgoing
+  commits, and **new or changed images/PDFs until I have looked at them** and rerun with
+  `PREPUSH_IMAGES_REVIEWED=1 git push`.
+- It supplements the manual review. It can be skipped with `git push --no-verify`, and it
+  can't read screenshots, uncommitted files, or secrets the scanner has no rule for.
+- **Scanner status:** gitleaks is not installed yet (see PROGRESS.md), so the hook currently
+  blocks every push by design until it is installed. Install: `brew install gitleaks`.
+
+**If something sensitive is found**
+- Stop the commit or push. Report the file and the type of issue **without reproducing the
+  secret**.
+- Remove or sanitize it. If it is already in Git history, deleting it from the latest
+  version is not enough, because the history still has it.
+- If it was exposed, **revoke or rotate the credential first**.
+- Propose any history repair and get my approval before anything destructive. Re-run the
+  scans after fixing. No scan guarantees safety; say exactly what was and wasn't checked.
 
 ## Cost safety (added after the 2026-08-22 billing incident)
 

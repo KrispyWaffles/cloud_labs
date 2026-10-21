@@ -1,8 +1,9 @@
 # Course Log: what to revisit, and how I'm scoring
 
-The single tracking file for the SAA-C03 course (Skillsoft Percipio). The **revisit list
+The single tracking file for the SAA-C03 course. The Percipio-era history (block M01-B01) is
+preserved below; from 2026-10-20 the course is Stéphane Maarek's Udemy course. The **revisit list
 comes first on purpose**: it's the part that matters most. Updated only after I confirm
-at the end of a block (see `WORKFLOW.md`, section 4.7). Nothing here is written
+at the end of a block or session, in one consolidated request (see `WORKFLOW.md`, section 5). Nothing here is written
 silently, and nothing is recorded as done that wasn't.
 
 ## How the revisit list works
@@ -43,11 +44,23 @@ silently, and nothing is recorded as done that wasn't.
 *Seeded 2026-10-14 from `PROGRESS.md` and lab Q&A results. Edit anything that doesn't
 match my own sense of where I'm stuck.*
 
-## Module plans
+## Course plans
 
-Planned once per module, from the video list I supply. Every video belongs to exactly one
-block. Exam mapping is separate and only where the local exam guide supports it
-(`WORKFLOW.md`, section 10).
+### Udemy: Stéphane Maarek, Ultimate AWS Certified Solutions Architect Associate (SAA-C03)
+
+Active course from 2026-10-20. Only the **current section** is planned, from the expanded
+screenshot I supply, in blocks of 3 to 4 related videos with ids `S##-B##` (Udemy section
+number, block number). A Udemy section number is not an exam domain; exam objectives are
+mapped separately where the exam guide supports it (`WORKFLOW.md`, section 9).
+
+| Block | Udemy section | Videos (in order, with durations) | Learning objective | Exam objective(s) | Status |
+|---|---|---|---|---|---|
+| *(none yet. Share the first section's expanded screenshot.)* | | | | | |
+
+### Percipio (previous course, history preserved)
+
+Planned once per module from the video list I supplied. Every video belongs to exactly one
+block. Exam mapping is separate and only where the local exam guide supports it.
 
 **Track 1: Design Secure Architectures** (Percipio syllabus). Each Percipio course is one
 module: M01 Architecture & the Well-Architected Framework (planned below), M02 Securing
@@ -63,16 +76,16 @@ summary). Plan proposed 2026-10-15; in use from 2026-10-18 (proceeded without ch
 | Block | Module | Videos (in order) | Learning objective | Exam objective(s) | Status |
 |---|---|---|---|---|---|
 | M01-B01 | M01 | 1. Course Overview (55s, intro)<br>2. AWS Global Infrastructure Essentials (10m 50s)<br>3. High Availability and Fault Tolerance Foundations (10m 38s)<br>4. Shared Responsibility and Security Baselines (9m 22s) | Explain where AWS workloads run (Regions, Availability Zones, edge), how redundancy and failover keep them available, and who is responsible for which security controls | Task 1.1 (AWS global infrastructure; shared responsibility model). Task 2.2 (global infrastructure; HA and fault-tolerant designs). Foundations only; later courses go deeper | Complete, logged 2026-10-19 |
-| M01-B02 | M01 | 5. Well-Architected Framework Fundamentals (10m 5s)<br>6. Documenting a Workload with the AWS Well-Architected Tool (9m 23s)<br>7. Turning Requirements into Architecture Decisions (8m 1s)<br>8. Course Summary (55s, wrap-up) | Use the Well-Architected pillars to evaluate a design, document a workload, and turn business requirements into design constraints without locking in implementation too early | No single task. The exam guide frames the exam as based on the Well-Architected Framework and on meeting business requirements (introduction), but I'm not mapping it to a task | Planned |
+| M01-B02 | M01 | 5. Well-Architected Framework Fundamentals (10m 5s)<br>6. Documenting a Workload with the AWS Well-Architected Tool (9m 23s)<br>7. Turning Requirements into Architecture Decisions (8m 1s)<br>8. Course Summary (55s, wrap-up) | Use the Well-Architected pillars to evaluate a design, document a workload, and turn business requirements into design constraints without locking in implementation too early | No single task. The exam guide frames the exam as based on the Well-Architected Framework and on meeting business requirements (introduction), but I'm not mapping it to a task | Not started. Superseded by the Udemy course on 2026-10-20; not abandoned as a topic, since the Well-Architected material can be covered when Udemy reaches it |
 
 ## Block results
 
 One row per logged block. First-attempt score only; hints and retries are noted
 separately.
 
-| Block | Date | First-attempt score | Missed / guessed / assisted concepts (revisit #) | Exercise (status) | Independence level | Time (approx.) | Next review action |
-|---|---|---|---|---|---|---|---|
-| M01-B01 | 2026-10-18 to 2026-10-19 | 2/5 (single 2/3, multi 0/2) | Region choice vs edge locations (#10), shared responsibility by service (#11, assisted fresh check right), redundancy vs failure domain (#12), HA vs FT (#13, Q1 right) | Find the single point of failure in `run02x-vpc` (inspect AZs, create and delete one subnet): completed and verified | Explained with assistance (guided step by step; not independent) | Not recorded | Recall: why subnet CIDRs can't overlap across AZs; recall: match redundancy to failure domain. Then M01-B02 |
+| Block | Date | First-attempt score | Missed / guessed / assisted concepts (revisit #) | Watched | Practiced | Verified | Independently explained | Time (approx.) | Next review action |
+|---|---|---|---|---|---|---|---|---|---|
+| M01-B01 | 2026-10-18 to 2026-10-19 | 2/5 (single 2/3, multi 0/2) | Region choice vs edge locations (#10), shared responsibility by service (#11, assisted fresh check right), redundancy vs failure domain (#12), HA vs FT (#13, Q1 right) | Yes | Yes (guided; inspected AZs, created and deleted one subnet in `run02x-vpc`) | Yes (CLI check, cleanup, all-region sweep) | No (explained with assistance; revisit later) | Not recorded | Recall: why subnet CIDRs can't overlap across AZs; recall: match redundancy to failure domain. Then M01-B02 |
 
 A score of 4/5 is a local review threshold, not proof of mastery or exam readiness.
 
@@ -81,7 +94,7 @@ A score of 4/5 is a local review threshold, not proof of mastery or exam readine
 One block per logged block, added when it's logged:
 
 ```
-### M##-B## Block title (YYYY-MM-DD)
+### S##-B## (Udemy) or M##-B## (Percipio) block title (YYYY-MM-DD)
 | Q | Type | Topic | My answer + reason | Correct answer | First attempt | Notes |
 |---|---|---|---|---|---|---|
 | 1 | single / multi (pick N) | ... | ... | ... | right / wrong / partial / guessed | hint used? |
@@ -115,11 +128,11 @@ spans several.
 
 ## Exercises and evidence
 
-Three separate statuses (`WORKFLOW.md`, section 7). Record the highest honestly reached.
+Four separate statuses (`WORKFLOW.md`, section 5): Watched, Practiced, Verified, Independently explained. Never merge them, and never record guided work as independent.
 
-| Block | Exercise | Type (lab reuse / extension / new / design) | Where (folder) | Completed and verified | Explained with assistance | Demonstrated independently |
-|---|---|---|---|---|---|---|
-| M01-B01 | Find the single point of failure in `run02x-vpc`: read each subnet's AZ, predict the impact of an AZ outage, create `m01-subnet-1b` (`10.0.7.0/24`, us-east-1b), explain why a subnet is one AZ, delete it | Extension of lab 01 plus a design discussion | `01-vpc-basics/` (my reflection is pending; to be pasted by me into that README) | Yes (CLI check of the subnet, cleanup, and an all-region sweep clean, 2026-10-19) | Yes | No |
+| Block | Exercise | Type (Udemy lesson / lab reuse / extension / new / design) | Where (folder) | Practiced | Verified | Independently explained | Guided or independent | Cleanup | Unresolved |
+|---|---|---|---|---|---|---|---|---|---|
+| M01-B01 | Find the single point of failure in `run02x-vpc`: read each subnet's AZ, predict the impact of an AZ outage, create `m01-subnet-1b` (`10.0.7.0/24`, us-east-1b), explain why a subnet is one AZ, delete it | Extension of lab 01 plus a design discussion | `01-vpc-basics/` (my reflection is pending; to be pasted by me into that README) | Yes | Yes (CLI check of the subnet) | No | Guided | Done; all-region sweep clean 2026-10-19 | Why subnet CIDRs can't overlap across AZs (revisit #8) |
 
 ## Later in the course
 
@@ -150,10 +163,12 @@ Where to pick up if a block was interrupted.
 | Item | Value |
 |---|---|
 | Exam date | 2026-11-20 |
-| Listed course duration | 32 h 35 min (21 courses = 30 h 25 min, plus 3 other items = 2 h 10 min). Listed video time, not total study time |
-| Provisional first-pass finish | 2026-11-07 to 2026-11-10 |
+| Percipio listed duration (previous course) | 32 h 35 min (21 courses = 30 h 25 min, plus 3 other items = 2 h 10 min). Listed video time, not total study time |
+| Udemy course duration | Not yet known; comes from the section screenshots |
+| Pace preference | 1.5 to 2 blocks per day, flexible, not a minimum |
+| First-pass finish | Re-estimate after the first two Udemy blocks. The earlier Nov 7 to 10 target was set for the Percipio course length and no longer stands |
 | Days from 2026-10-15 to Nov 7 / Nov 10 / Nov 20 | 23 / 26 / 36 |
-| Observed time per block | M01-B01: time not recorded (done across 2 days with a break). Record B02's time to get a first real number |
+| Observed time per block | Percipio M01-B01: not recorded. **Udemy: measure the first two blocks in full** (videos, checks, quiz, exercise) |
 | Estimated remaining workload | *(not yet known)* |
 | Gap to first-pass target | *(not yet known)* |
 | Module-end Percipio test scores | *(none yet)* |
@@ -162,7 +177,8 @@ Where to pick up if a block was interrupted.
 
 | Metric | Value |
 |---|---|
-| Modules completed | 0 |
+| Percipio modules completed | 0 |
+| Udemy blocks completed | 0 |
 | Blocks completed | 1 |
 | Questions answered (first attempt) | 5 |
 | Overall first-attempt accuracy | 2/5 (40%) |

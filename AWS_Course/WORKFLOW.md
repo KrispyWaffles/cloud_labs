@@ -1,12 +1,13 @@
-# SAA-C03 Study Workflow (Skillsoft Percipio + hands-on labs)
+# SAA-C03 Study Workflow (Udemy: Stéphane Maarek + hands-on labs)
 
-The working agreement for the SAA-C03 course sessions. Claude reads this file, and the
-revisit list in `log.md`, at the start of a course session. Adapted from
-`transcript-workflow-template.md` (the CLF-C02 original, kept untouched as reference).
+The working agreement for course sessions. Claude reads this file, and the revisit list in
+`log.md`, at the start of a course session. Adapted from `transcript-workflow-template.md`
+(the CLF-C02 original, kept untouched as reference).
 
-**Version 2, 2026-10-15.** Replaces the 2026-10-14 version, which assumed AWS Skill
-Builder and one 5-question quiz per pasted section. The course is **Skillsoft
-Percipio**; work is now planned per module and run per *block* of videos.
+**Version 3, 2026-10-20.** Moves from Skillsoft Percipio to **Stéphane Maarek's Ultimate AWS
+Certified Solutions Architect Associate (SAA-C03) course on Udemy**. The Percipio work already
+done (block `M01-B01`) is preserved in `log.md` and is not re-done. Git safety rules live in
+`instructions.md` ("Commit and push safety") and apply here; this file doesn't duplicate them.
 
 ---
 
@@ -15,303 +16,207 @@ Percipio**; work is now planned per module and run per *block* of videos.
 | Item | Value |
 |---|---|
 | Exam | AWS Certified Solutions Architect - Associate (SAA-C03) |
-| Exam date | **2026-11-20** (keep unless the learner explicitly changes it) |
-| Course | Skillsoft Percipio, SAA-C03 certification path |
-| Listed course duration | 21 courses = 30 h 25 min, plus 3 other items = 2 h 10 min (32 h 35 min total). **Listed video time, not total study time.** |
-| Background | Passed Cloud Practitioner. JavaScript / full-stack experience. Use it to explain a concept when it helps; don't introduce application development. |
-| First-pass target (provisional) | Finish the course around **Nov 7 to 10**, leaving time for mixed practice and weak-area review |
-| Exam guide | `AWS_Course/AWS_SAA_guide/` |
+| Exam date | **2026-11-20**, unless the learner reports a change |
+| Course | Udemy: Stéphane Maarek, Ultimate AWS Certified Solutions Architect Associate SAA-C03 |
+| Background | Passed Cloud Practitioner. JavaScript / full-stack. Use it to connect unfamiliar infrastructure to familiar applications, without building applications |
+| Exam guide | `AWS_Course/AWS_SAA_guide/` (local, not committed) |
+| Pace | 1.5 to 2 blocks per day is a flexible preference, not a minimum. Sustainable progress and understanding come first |
 
-Goals: understand concepts and make sound architecture decisions; prepare for
-scenario-based questions; apply concepts hands-on; build honest, explainable evidence in
-the repo.
+Goals: understand AWS, prepare for SAA, and produce honest evidence of hands-on work in
+GitHub. Not goals: a dashboard, a second course, or growing this into a workflow project.
 
-**Why the process looks like this:** lab 03 (NAT gateway) was completed successfully
-without understanding the configuration. Purpose, worked examples and gradually reduced
-help come before questions the learner hasn't been prepared to answer. A completed
-configuration is not evidence of understanding.
+**Why the process looks like this:** lab 03 (NAT gateway) was completed without understanding
+it. Pasting a transcript, finishing a demo, or following supplied steps is **not** evidence of
+understanding. Explanation, prediction, and independent recall are.
 
-## 1. Principles
+## 1. Organize the current section only
 
-- **Understand, then apply.** Purpose and a small worked example before steps and before
-  questions.
-- **Bounded.** One module planned at a time, one exercise per block, no automatic
-  restarts. Missing a concept never means redoing the whole block or lab.
-- **Honest evidence.** Assisted work is valid progress but is never labelled independent
-  mastery. Generated instructions are not completion evidence.
-- **Practical.** Learn, apply, explain, verify, document, continue.
-- **Nothing is logged without confirmation**, and nothing is recorded as done that wasn't.
+The learner provides screenshots of an **expanded Udemy section** showing video titles and
+durations. Claude organizes **only that section**.
 
-## 2. Plan each module once
+- **Blocks of 3 to 4 related videos** (2 to 4 when topic boundaries make more sense).
+- **Keep a concept and its hands-on demo together** where practical.
+- **Preserve course order.** Never invent missing titles, durations, or lesson content.
+- Plan from the screenshot; learn from the **transcripts**, not the titles.
+- If text is unreadable, **ask for a cropped screenshot**.
+- **Identifiers:** Udemy blocks are `S##-B##` (Udemy section number, block number), for
+  example `S03-B02`. Existing Percipio identifiers (`M01-B01`) stay as they are. A Udemy
+  section number is **not** an exam domain; exam objectives (Domain 1 to 4, Tasks 1.1 to 4.4)
+  are mapped separately, only where the exam guide supports it (section 9). "Not mapped" is a
+  valid entry.
+- **Administrative videos** (introductions, downloads, account setup) don't each get checks,
+  quizzes, or labs. Do the necessary setup efficiently and move on.
+- Record the plan in `log.md` under **Course plans**. Don't re-plan a section without a
+  concrete reason.
 
-At the start of a module the learner provides a screenshot or list of its videos. Claude
-plans **that module only**.
+## 2. After every instructional video
 
-1. **Account for every video.** Each one lands in exactly one block.
-2. **Group into coherent study blocks.**
-   - Default: three substantive videos.
-   - Two or four when topic boundaries or complexity justify it.
-   - Short introductions and wrap-ups join an adjacent block and don't count as
-     substantive videos.
-   - Keep course order unless there's a clear prerequisite reason to suggest otherwise
-     (and say why).
-3. **Give each block**: a stable ID (`M03-B02` = module 3, block 2), the module title,
-   the video titles in order, and **one** learning objective.
-4. **Map to exam objectives separately**, only where the local exam guide supports it
-   (see section 10). Never invent a mapping, and don't imply a course title proves
-   complete exam coverage. "Not mapped" is a valid entry.
-5. Record the plan in `log.md` under **Module plans**. Don't regroup a module again
-   without a concrete reason.
+The learner watches one video, then pastes its transcript. Claude **identifies it** from the
+supplied title and the plan, says in one short line which video it received and what's next, and
+runs **exactly two questions, one at a time**, waiting for each answer. The whole check takes
+about two minutes.
 
-## 3. Collect transcripts without interrupting the viewing flow
+1. *"Without looking at the transcript or notes, what did you learn? Explain it in 1 to 3
+   sentences."*
+2. *"What problem does [service or feature from this video] solve?"* (one targeted purpose
+   question)
 
-The learner watches **one video, then pastes its transcript** before watching the next.
+Then:
+- **Brief, specific feedback.** If the learner struggles, offer **one small hint** and let them
+  **retry** before explaining.
+- **Flag persistent confusion** for the block review and continue.
+- **No third question.** No full summary after each transcript. No application question yet.
+- A pasted transcript is **not** evidence of understanding. Only the learner's own answers are.
+- **Raw transcripts are never saved to the repo.** Keep original summaries, notes, scores,
+  and exercise evidence. Don't introduce persistent transcript storage without discussing it.
+- Administrative videos: acknowledge and continue, with no check.
 
-For each transcript, Claude:
-- Identifies it from the supplied title and the module plan.
-- Replies with one brief line: **"Received video 1 of 3: [title]. Next: [title]."**
-- Does **not** summarise, quiz, or suggest a lab yet.
-- Then runs the **per-video check** (added 2026-10-18), about two minutes, one question at
-  a time, waiting for each answer:
-  1. *"Without looking at the transcript or notes, what did you learn? Explain it in 1 to
-     3 sentences."*
-  2. After the answer, one targeted purpose question from that video: *"What problem does
-     [specific service or feature] solve?"*
-  - Brief feedback. If stuck, one small hint before explaining.
-  - Stay within that video's material. Flag remaining confusion for the block review,
-    then move on to the next video.
-  - No application question and no combined summary yet. The end-of-block summary,
-    scenario quiz, exercise and repo documentation are unchanged.
-- Does **not** treat paragraphs as separate videos.
-- Asks one focused question **only** if the video's identity is genuinely unclear.
+If an instructional video's identity is genuinely unclear, ask one focused question.
 
-When every planned transcript is in, Claude says the block is **ready**. The learning
-cycle starts when the learner says "Block complete," "Start review," or equivalent.
+## 3. End of block
 
-**Raw transcripts are never saved to the repository** (paid course material). Keep
-original summaries, notes, scores and exercise evidence.
+When the learner confirms the videos and quick checks are done, Claude runs, **one stage at a
+time** (not the whole session in one response):
 
-If the learner stops midway, Claude keeps a clear **resume point** in `log.md` (which
-videos are received, which stage was reached) and resumes there, after confirmation.
+### 3.1 Combined summary (about 5 minutes, never more than 10)
 
-## 4. The block cycle
-
-```
-one due recall question (if appropriate)
-  -> combined summary + worked example
-  -> five scenario questions (one at a time)
-  -> targeted clarification (bounded)
-  -> one application exercise
-  -> brief learner reflection
-  -> confirmed logging
-```
-
-Each stage is presented when needed, **not** the whole session in one giant response.
-
-### 4.1 Session-start recall (at most one)
-
-At the **start of a study session**, ask **at most one** delayed-recall question, *before*
-showing the relevant notes. Don't repeat this intake step for every transcript or block.
-
-- Pick the highest-priority item in the `log.md` revisit list that is relevant to the
-  session. Relevance beats raw priority: an old unrelated question must **not** block
-  coursework (the NAT item stays on the list; it isn't a gate).
-- If the learner can't answer, briefly explain the gap, keep it on the revisit list, and
-  continue.
-
-### 4.2 Combined summary and worked example
-
-One summary per block. About **five minutes** of reading; ten is the maximum, not a
-target. Plain language, short paragraphs, useful bullets, acronyms expanded on first use,
-repetition across transcripts removed.
-
-Include, in this order:
-1. **The problem** these concepts solve.
-2. **The main ideas** and how they connect.
-3. **One short worked example** that shows the reasoning.
-4. **Important comparisons or exam distinctions.**
+Plain language, short paragraphs, expanded acronyms, no repetition across videos. It covers:
+1. **The problem** the concepts solve and why they exist.
+2. **How the concepts connect.**
+3. **One concrete example** (a JavaScript application example when it helps).
+4. **Exam distinctions** that matter, framed by requirements (cost, availability, security,
+   performance, operational effort). No keyword tricks, and don't frame the exam as deceptive.
 5. **A 3-to-5-point recap.**
 
-Rules:
-- A small diagram or comparison table only when it clarifies something.
-- Explain how requirements drive decisions: cost, availability, security, performance,
-  operational effort, whichever apply. No keyword tricks, and don't frame the exam as
-  deliberately deceptive.
-- **Separate transcript content from supplemental explanation** (label supplements).
-- Verify consequential technical uncertainties against official AWS documentation when
-  available; otherwise say what's uncertain.
+Label supplemental explanation separately from course content, and verify consequential
+technical uncertainty against official AWS documentation, or say what's uncertain.
 
-### 4.3 Five scenario questions
+### 3.2 Five scenario questions, one at a time
 
-One at a time. Wait for the answer.
+- Multiple-choice or multiple-response, **state how many to select**.
+- **Plausible alternatives** and meaningful architectural trade-offs. No obvious definitions
+  and no trick wording.
+- Only **current or previously covered** concepts. Don't bring in unfamiliar services.
+- Enough information for a defensible answer. Vary answer positions naturally.
+- **No answers or hints before the first attempt** unless the learner asks.
+- Ask for a **brief reason** with each answer, and let the learner say "guessing" or "not sure".
+- After each answer: right or wrong, the **decisive requirement**, why the correct option fits,
+  and why the main alternatives do not. Brief when the reasoning was sound; fuller on a miss,
+  a guess, or a misconception. Analogies only when helpful.
+- **First-attempt score** is kept separate from hints and retries. Multiple-response is
+  all-or-nothing, with partial selections explained. Fix or replace a flawed question; never
+  penalize the learner for it.
+- **4/5 is a block-review checkpoint**, not proof of mastery or exam readiness.
 
-- Realistic scenarios needing **application, comparison or troubleshooting**.
-- Plausible wrong options, and enough information for a defensible answer.
-- Stay within the current block and previously covered concepts. Don't bring in
-  unfamiliar services just to raise difficulty.
-- Include single-answer and multiple-response questions when suitable. **State how many
-  to select** ("Choose TWO.").
-- Vary answer positions naturally.
-- **No answers or hints before the first attempt** unless the learner asks for help.
-- Ask for the answer **and a brief reason**. "Guessing" and "not sure" are acceptable.
+### 3.3 Bounded remediation
 
-After each response:
-- Say whether it's correct.
-- Name the **decisive requirement**.
-- Explain why the tempting alternatives don't meet it.
-- **Brief** when the reasoning was sound. **Expand** only when the learner missed,
-  guessed, or showed a misconception.
-- Analogies only when they help. Plain language throughout.
+- Minor errors, main concept understood: record and continue.
+- A foundational concept missed: one targeted explanation, then **one fresh check**.
+- Still unclear: record the exact gap and a specific next action.
+- If a gap prevents safe or meaningful practice, simplify or defer the exercise.
 
-Scoring:
-- **First-attempt** score is kept separate from hints and retries.
-- Multiple-response is **all-or-nothing**, and partially correct selections are
-  explained.
-- If a question is ambiguous or technically flawed, **fix or replace it**. Don't penalise
-  the learner.
-- **4/5 is a local review threshold**, not proof of mastery or exam readiness.
+Never restart the whole block, repeat the section, or rebuild a whole lab automatically.
 
-### 4.4 Bounded remediation
+## 4. One practical application per block
 
-- **Minor errors, main concept understood:** record them and continue.
-- **Foundational concept missed:** one targeted explanation, then **one fresh check**.
-- **Still unclear:** record the exact gap with a specific next action.
-- If a gap prevents meaningful or safe practice, simplify or defer the exercise.
+Every block includes one useful practical application.
 
-Never automatically restart the quiz, repeat the module, or rebuild a whole lab.
-
-### 4.5 One application exercise per block
-
-One per **block**, not per video. Choose in this order:
-1. Reuse a relevant portion of an **existing lab** (`01` to `10`).
-2. **Extend** an existing lab by one small, already-taught capability.
-3. **Create a new exercise** only when existing labs don't fit.
-
-Default shape: one clear objective, roughly **10 to 15 minutes** including setup and
-cleanup, and **one observable result** that demonstrates the concept. Examples: inspect a
-configuration, change one setting, test a behaviour, trace a request, diagnose a
-controlled failure.
-
-- **Conceptual blocks** get an architecture or troubleshooting exercise, labelled
-  accurately. Never imply resources were deployed when they weren't.
-- If setup would dominate, shrink the scope or use a design exercise. Don't force an
-  expensive deployment to satisfy "hands-on."
-
-Teaching sequence for an exercise:
-1. Explain the purpose and expected behaviour.
-2. Demonstrate the reasoning with a small example.
-3. **Learner predicts** what will happen.
-4. **Learner performs** the action.
-5. **Verify** from actual evidence.
-6. **Learner explains** why it happened.
-7. Complete and **verify cleanup** where applicable.
-
-Rules:
-- The learner operates AWS under the existing project rules (Claude doesn't configure
-  anything in the account). State **costs and prerequisites before** any resource
-  creation. Anything touching EC2, RDS or a NAT gateway ends with the all-region
-  billable-resource sweep from `instructions.md` ("Cost safety"). Destructive cleanup
-  stays with the learner.
-- **Independence and complexity follow demonstrated understanding.** Later course
-  placement alone is not evidence the learner is ready for a larger lab.
-- **Integration labs** belong at natural **module milestones**, use only concepts already
-  practised, and get a separate bounded session. Not automatic after every module.
-- `LAB.md` carries Claude's instructions and explanations. Where a block's exercise is
-  new, it goes in a `LAB.md` in the numbered lab folder in the repo root (`11-...`),
+- A **relevant Udemy hands-on lesson satisfies this.** Don't create a duplicate lab.
+- Otherwise add **one focused 10 to 15 minute exercise** with a single learning objective.
+- **Prefer extending an existing lab** (`01` to `10`) over creating a new project. New
+  exercises, when unavoidable, go in the next numbered folder in the repo root (`11-...`),
   never under `AWS_Course/`.
+- **Conceptual material:** use a diagram, a configuration inspection, or a troubleshooting
+  exercise when deployment adds little value. Label it accurately (nothing implied as deployed).
+- Use JavaScript application examples where helpful, without unnecessary app development.
 
-### 4.6 Brief learner reflection (3 to 5 minutes)
+**Sequence:** explain -> demonstrate -> **learner predicts** -> **learner acts** -> verify
+from evidence -> **learner explains** -> clean up.
 
-The learner writes the lab `README.md` **in their own words**. Claude doesn't write or
-rewrite it. Claude may ask questions, flag inaccuracies, and suggest corrections for the
-learner to phrase themselves.
+- Give enough explanation before testing an unfamiliar concept. Reduce help gradually.
+  **Never mark independent mastery when the learner followed supplied steps.**
+- Stay within the block. Briefly explain an essential prerequisite; defer unrelated topics and
+  larger integrations (listed under **Later in the course** in `log.md`).
+- **AWS permissions, cost checks, cleanup, and billable-resource verification are unchanged**
+  (`instructions.md`, "Cost safety"). The learner operates AWS; Claude does not provision or
+  delete resources without the required authorization. State costs and prerequisites first.
+  Anything touching EC2, RDS, or a NAT gateway ends with the all-region sweep.
 
-Four prompts:
-1. **Goal:** what was I trying to accomplish?
-2. **Action:** what did I inspect, configure, or test?
-3. **Evidence:** what actually happened?
-4. **Understanding:** why did it happen, and what remains unclear?
+## 5. Recall, pacing, and progress
 
-### 4.7 Confirmed logging
+- **Next session begins with a short independent recall check** from the previous session,
+  including one relevant weak area from the revisit list when appropriate. This is at most a
+  few questions, before any notes are shown.
+- The **NAT gateway** item stays on the revisit list and **never blocks unrelated coursework**.
+- **Measure actual time for the first two Udemy blocks**, including checks, quiz, and exercise.
+  Use that, plus real progress and practice results, to review pacing. Don't assume finishing
+  the course equals readiness.
+- **Resume points:** when a session ends mid-block, record partial progress and the exact
+  next action in `log.md`. Resume there; don't restart the block.
+- **Four separate statuses**, recorded per block and never merged:
 
-After the block, ask **once**: *"Log this block's results?"* Nothing is written to
-`log.md` before a yes. Log:
-- Block ID and video coverage
-- **First-attempt** quiz score
-- Missed, guessed, or assisted concepts
-- Exercise status and evidence location
-- Independence level (see section 7)
-- Next review action
-- Approximate time spent, when known
-
-Preserve the existing revisit status rules and history. **Don't claim understanding was
-demonstrated on a later day unless it actually was.**
-
-## 5. Scope control
-
-- Stay within the current block and concepts already covered.
-- When a topic appears later: identify its upcoming lesson if known, explain only the
-  minimum needed now, add the remaining question to **Later in the course** in `log.md`,
-  and continue.
-- A missing prerequisite gets a brief explanation (about two minutes). If it needs more,
-  name the dependency and simplify the activity rather than silently expanding the
-  session.
-- No extra services, frameworks, full applications, flashcard systems, duplicate
-  summaries or unrelated projects by default.
-
-## 6. Repository evidence and Git
-
-- `LAB.md` = Claude's instructions and explanations. Lab `README.md` = the learner's own
-  account. They stay separate.
-- Keep evidence that demonstrates something: code, configuration, diagrams, sanitized
-  output. **No screenshots of every click.**
-- **Git checkpoints** after an exercise or coherent piece of work: Claude proposes one,
-  reviews the diff, checks for secrets, credentials and sensitive output (account IDs in
-  screenshots, keys, tokens), and drafts the message. **Commits happen when the learner
-  asks; pushing is the learner's**, as before. No artificial commits to increase
-  contribution counts.
-
-## 7. Evidence levels (tracked separately)
-
-| Level | Meaning |
+| Status | Meaning |
 |---|---|
-| **Completed and verified** | The exercise was done and the result was verified from actual output |
-| **Explained with assistance** | The learner explained why it happened, with hints or prompting |
-| **Demonstrated independently** | The learner chose the steps and explained the reasoning without help |
+| **Watched** | The videos were watched and the per-video checks done |
+| **Practiced** | The exercise or hands-on lesson was done, with or without help |
+| **Verified** | The result was confirmed from real evidence (CLI output, console, test) |
+| **Independently explained** | The learner explained why it works, unaided, including at a later recall |
 
-A block can be "completed and verified" without being "demonstrated independently."
-Record the highest level honestly reached.
+- **Logging approval:** ask **once, consolidated**, at the end of a block or session. One
+  request covers the block result, exercise status, revisit changes, time, and resume point.
+  Don't ask repeatedly. Nothing is written without a yes.
+- **Revisit statuses** are unchanged (Open, Reviewing, Solid; Solid needs two clean recalls on
+  different days with no hints). Never claim later-day understanding unless it happened.
 
-## 8. Logging and continuity
+## 6. Exercise documentation and commits
 
-Use the existing tracker, `AWS_Course/log.md`. It holds: revisit list (first), module
-plans, block results, per-question detail, running metrics, exercises, **Later in the
-course**, **Resume point**, and **Exam pacing**. Don't create competing trackers.
+Each completed block exercise produces a meaningful record, and a Git commit **when files
+changed**. The learner provides their own explanation; **Claude never fabricates a reflection
+or a result.**
 
-Revisit statuses are unchanged: **Open**, **Reviewing** (right once after being missed,
-or right with a hint), **Solid** (recalled correctly twice, on different days, without
-hints).
+The record contains:
+- **Goal** and block identifier.
+- **What was configured or changed.**
+- **Sanitized verification evidence** (crop screenshots; no account ID, IPs, keys).
+- **What the learner understood, in their own words** (about 3 to 5 minutes; Claude may ask
+  questions, flag inaccuracies, and suggest corrections, but doesn't write it).
+- **Guided or independent.**
+- **Cleanup status** and unresolved questions.
 
-## 9. Pacing, module close and exam preparation
+`LAB.md` (Claude's instructions) and the lab's `README.md` (the learner's account) stay separate.
+Use clear commit messages, for example `lab: complete S03-B02 IAM permissions exercise`. No
+empty commits, no artificial activity, and no unrelated changes in the commit.
 
-- A normal block takes roughly **45 to 70 minutes**, as an estimate. Dense material or
-  troubleshooting can take longer. Splitting a block across sessions is fine.
-- **Pilot the first two blocks**, then use actual time and progress to estimate the
-  remaining workload.
-- Keep **Nov 20** as the exam target and **Nov 7 to 10** as the provisional first-pass
-  finish. If the observed pace makes that unrealistic, **show the gap honestly** in
-  `log.md` under Exam pacing.
-- **At module completion:** take Percipio's built-in test, review missed and guessed
-  concepts, add fresh mixed questions only where needed, and include delayed recall.
+**Before committing and before every push, follow `instructions.md`, "Commit and push
+safety"**: specific files only, staged-diff review, screenshot review, secret scan, outgoing
+range check, and a report. The local pre-push hook supplements these checks. If a check can't
+run or finds something, stop and explain.
+
+## 7. Scope control
+
+- Stay within the current block and concepts already covered. When a later topic appears,
+  name its likely lesson if known, give the minimum explanation, add the rest to **Later in the
+  course**, and continue.
+- A missing prerequisite gets a short explanation (about two minutes). If it needs more, name
+  the dependency and simplify the activity.
+- Not added by default: extra services, frameworks, full applications, flashcards, duplicate
+  summaries, unrelated projects, or larger integration labs.
+
+## 8. Section close and exam preparation
+
+- At the end of a Udemy section, review missed and guessed concepts and add fresh mixed
+  questions only where needed. Include delayed recall.
+- Larger integration labs belong at natural milestones, use concepts already practiced, and get
+  their own bounded session. They are not automatic.
 - **Before the exam:** assess coverage against the exam guide and use broader practice
-  assessments. Video completion, repository activity, or a handful of generated questions
-  are not exam readiness.
+  assessments (for example, practice exams). Video completion, repository activity, or a few
+  generated questions are not exam readiness.
 
-## 10. Exam objective reference
+## 9. Exam objective reference
 
-Source: the local exam guide, `AWS_Course/AWS_SAA_guide/solutions-architect-associate-03.pdf`
-(task statement titles from its table of contents; weights from its content-domain list).
-Map a block to a task only where the guide's knowledge/skills list supports it.
+Source: `AWS_Course/AWS_SAA_guide/solutions-architect-associate-03.pdf` (task titles from its
+table of contents; weights from its content-domain list). Map a block to a task only where the
+guide's knowledge and skills lists support it.
 
 | Domain (weight of scored content) | Tasks |
 |---|---|
@@ -320,14 +225,11 @@ Map a block to a task only where the guide's knowledge/skills list supports it.
 | **3. Design High-Performing Architectures** (24%) | 3.1 Determine high-performing and/or scalable storage solutions<br>3.2 Design high-performing and elastic compute solutions<br>3.3 Determine high-performing database solutions<br>3.4 Determine high-performing and/or scalable network architectures<br>3.5 Determine high-performing data ingestion and transformation solutions |
 | **4. Design Cost-Optimized Architectures** (20%) | 4.1 Design cost-optimized storage solutions<br>4.2 Design cost-optimized compute solutions<br>4.3 Design cost-optimized database solutions<br>4.4 Design cost-optimized network architectures |
 
-The older `AWS-Certified-Solutions-Architect-Associate_Exam-Guide.pdf` (version 1.0) is
-kept alongside it; both list the same four domains and weights.
+## 10. What this workflow does not change
 
-## 11. What this workflow does not change
-
-- The original CLF-C02 template, existing scores and revisit items, progress history, lab
-  folders and numbering, and the learner's lab `README.md` files.
-- AWS access rules: Claude doesn't run AWS actions on the learner's behalf, destructive
-  cleanup stays with the learner, and the cost-safety sweep stays mandatory.
-- The repo teaching loop in `instructions.md` (purpose first, predict before acting,
-  hint ladder, gradual fade, delayed recall).
+- The CLF-C02 template, existing scores and revisit items, progress history, lab folders and
+  numbering, and the learner's lab `README.md` files.
+- AWS access rules: Claude doesn't run AWS actions on the learner's behalf, destructive cleanup
+  stays with the learner, and the cost-safety sweep stays mandatory.
+- The repo teaching loop in `instructions.md` (purpose first, predict before acting, hint
+  ladder, gradual fade, delayed recall).

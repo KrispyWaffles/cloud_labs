@@ -159,11 +159,29 @@ any lab touching EC2/RDS/NAT Gateway.
 - Logged in `AWS_Course/log.md` (four new revisit items, two updated). Time spent not
   recorded.
 
+## 2026-10-20 — Switch to the Udemy course, Git safety layer
+
+- **Course change:** from Skillsoft Percipio to Stéphane Maarek's Ultimate AWS Certified
+  Solutions Architect Associate (SAA-C03) on Udemy. Exam still **2026-11-20**. Reworked
+  `AWS_Course/WORKFLOW.md`, `WORKFLOW-SUMMARY.md`, `log.md` and `instructions.md`:
+  one section organized at a time into blocks of 3 to 4 videos (`S##-B##` ids), exactly two
+  questions after each instructional video, combined summary and five scenario questions per
+  block, one practical per block (a Udemy hands-on lesson counts), four separate statuses
+  (watched, practiced, verified, independently explained), measured time for the first two
+  blocks. Percipio block M01-B01 and the 13 revisit items are preserved. M01-B02 was never
+  started. The earlier Nov 7 to 10 finish target no longer stands and will be re-estimated.
+- **Git safety:** `.gitignore` now covers credentials, keys, Terraform state and plans;
+  `instructions.md` has a full pre-commit and pre-push procedure; `scripts/pre-push` is
+  installed as a local hook that fails closed. **gitleaks is not installed**, so the hook
+  blocks every push until it is. Hook logic was tested with a stub scanner only; no real
+  secret scan has run yet. Already-tracked files that match ignore rules: `.DS_Store` (three
+  copies). Install with `brew install gitleaks`.
+
 ## Next up
 
-0. M01-B02 (Well-Architected Framework Fundamentals, Documenting a Workload with the
-   Well-Architected Tool, Turning Requirements into Architecture Decisions, Course
-   Summary). Record time spent this time to start estimating pace.
+0. Install gitleaks (`brew install gitleaks`) and run the first real scan before the next
+   push. Then share the first Udemy section's expanded screenshot so its blocks can be
+   planned. (The old Percipio M01-B02 note no longer applies; that block was never started.)
 1. Start the next session with delayed recall: explain what makes a subnet public,
    before seeing any notes.
 2. One concept: what a NAT gateway does to the source address of an outgoing request,

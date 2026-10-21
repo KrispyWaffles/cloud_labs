@@ -1,0 +1,33 @@
+# Screenshots taken while asking for help. Never committed.
+# Copy a cropped one into a lab's images/ folder only when it is real evidence.
+scratch/
+
+# macOS noise
+.DS_Store
+
+# Credentials and keys. .gitignore is one layer only; it is not a secret detector.
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+.aws/
+credentials
+
+# Terraform state, backups, saved plans, local working dirs, variable files that may hold secrets
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+.terraform/
+*.tfvars
+*.tfvars.json
+crash.log
+crash.*.log
+
+# Third-party course material and course screenshots (copyrighted / employer site name)
+AWS_Course/screenshots/
+AWS_Course/AWS_SAA_guide/
