@@ -40,7 +40,9 @@ silently, and nothing is recorded as done that wasn't.
 | 11 | Shared responsibility depends on the service (EC2 guest OS is yours; managed services are not) | Said AWS patches the EC2 OS (video check, then M01-B01 Q3). Got the Lambda follow-up right after an explanation | M01-B01, 2026-10-18 | 2 | Reviewing | Fresh case on a different day (e.g. RDS vs EC2 vs S3) with no hints |
 | 12 | Match redundancy to the failure domain (N+1 = server, multi-AZ = AZ, multi-Region = Region) | Chose a same-AZ extra instance to survive an AZ outage (M01-B01 Q4) | M01-B01, 2026-10-18 | 1 | Reviewing | Right on first attempt in S03-B01 Q3 (2026-10-21). One more clean recall on a different day: which design survives a server, an AZ, a Region failing? |
 | 13 | High availability vs fault tolerance | Blurred the two in the video check; then got M01-B01 Q1 right on first attempt | M01-B01, 2026-10-18 | 1 | Reviewing | Recall 2026-10-19: definitions right, cost needed a prompt. One more clean recall including cost |
-| 14 | Which services are global vs regional (IAM and Route 53 global; EC2 and Lambda regional) | In the S03-B01 exercise predicted IAM regional and Lambda global; the console showed the opposite. Explained global vs regional scope correctly afterwards | S03-B01, 2026-10-21 | 1 | Open | Recall on a different day: sort IAM, Route 53, CloudFront, WAF, EC2, Lambda into global and regional, with no notes |
+| 14 | Which services are global vs regional (IAM and Route 53 global; EC2 and Lambda regional) | In the S03-B01 exercise predicted IAM regional and Lambda global; the console showed the opposite. Explained global vs regional scope correctly afterwards | S03-B01, 2026-10-21 | 2 | Open | Another recall on a different day with no notes. 2026-10-22 recall: 5 of 6 right; put CloudFront as regional while unsure (it is global) |
+| 15 | Account alias: a friendly, unique sign-in URL in place of the 12-digit account ID (not a security control) | Answered the alias purpose question with a different idea (removing a compromised user), then learned the real purpose | S04-B01, 2026-10-22 | 1 | Open | Recall on a different day: what problem does an account alias solve, and what does it not hide? |
+| 16 | IAM user and group access is long-term; temporary credentials come from roles | Described user and group access as temporary in the video check | S04-B01, 2026-10-22 | 1 | Open | Confirm at S04-B04 (roles): which identities get temporary credentials, and why |
 
 *Seeded 2026-10-14 from `PROGRESS.md` and lab Q&A results. Edit anything that doesn't
 match my own sense of where I'm stuck.*
@@ -57,6 +59,11 @@ mapped separately where the exam guide supports it (`WORKFLOW.md`, section 9).
 | Block | Udemy section | Videos (in order, with durations) | Learning objective | Exam objective(s) | Status |
 |---|---|---|---|---|---|
 | S03-B01 | Section 3: Getting started with AWS (3 lectures, 13 min; sections 1 and 2 were intro and code/slides download, skipped as administrative) | 1. AWS Cloud Overview - Regions & AZ (8:01)<br>2. [Important] AWS Console UI Update (1:14, administrative: no check)<br>3. Tour of the AWS Console & Services in AWS (3:52, hands-on demo) | Explain what AWS Regions, Availability Zones and edge locations are and how to choose a Region; get oriented in the console and tell global services from regional ones | Task 1.1 and Task 2.2 (global infrastructure: Regions, Availability Zones). Foundations only; overlaps Percipio M01-B01 | Complete, logged 2026-10-21 |
+| S04-B01 | Section 4: IAM & AWS CLI (20 lectures, 57 min; plus a section quiz) | 1. IAM Introduction: Users, Groups, Policies (3:22)<br>2. IAM Users & Groups Hands On (6:23, Udemy hands-on)<br>3. AWS Console Simultaneous Sign-in (1:48) | Explain what IAM users and groups are, why you create them instead of using root, and how to sign in as an IAM user | Task 1.1 (IAM users, groups, roles and policies; applying best practices to IAM and root users) | Complete, logged 2026-10-22 |
+| S04-B02 | Section 4 | 4. IAM Policies (2:50)<br>5. IAM Policies Hands On (8:01, Udemy hands-on)<br>6. IAM MFA Overview (4:10)<br>7. IAM MFA Hands On (4:01, Udemy hands-on) | Explain how policies decide what an identity may do (least privilege) and how MFA proves who it is | Task 1.1 (policy-based authorization, least privilege, MFA on root and IAM users) | Planned |
+| S04-B03 | Section 4 | 8. AWS Access Keys, CLI and SDK (4:03)<br>12. AWS CLI Hands On (3:50, Udemy hands-on)<br>14. AWS CloudShell (3:53)<br>Setup videos 9 to 11 (Windows 1:45, Mac OS X 1:28, Linux 1:30) skipped as administrative; the 0:12 CloudShell Region Availability item is a short read | Explain how access keys, the CLI and SDKs let code and people call AWS, and when CloudShell is the easier option | Task 1.2 (application configuration and credentials security, from its knowledge list). Foundations only | Planned |
+| S04-B04 | Section 4 | 15. IAM Roles for AWS Services (1:39)<br>16. IAM Roles Hands On (2:05, Udemy hands-on)<br>17. IAM Security Tools (0:54)<br>18. IAM Security Tools Hands On (2:23, Udemy hands-on) | Explain why AWS services use roles instead of stored keys, and which IAM tools show who can do what | Task 1.1 (roles, role-based access, access visibility) | Planned |
+| S04-B05 | Section 4 (section close) | 19. IAM Best Practices (1:29)<br>20. IAM Summary (1:05, wrap-up)<br>IAM & AWS CLI Quiz (Udemy section quiz) | Pull the IAM ideas together as a short best-practices checklist | Task 1.1 (security best practices). Practical to be decided: a read-only self-check of my own account against the checklist | Planned |
 
 ### Percipio (previous course, history preserved)
 
@@ -86,6 +93,7 @@ separately.
 
 | Block | Date | First-attempt score | Missed / guessed / assisted concepts (revisit #) | Watched | Practiced | Verified | Independently explained | Time (approx.) | Next review action |
 |---|---|---|---|---|---|---|---|---|---|
+| S04-B01 (Udemy) | 2026-10-21 to 2026-10-22 | 5/5 (single 3/3, multi 2/2), no guesses | No quiz misses. Check gaps: policies not mentioned, "temporary" access (#16), account alias purpose (#15). Session recall: global vs regional 5 of 6 (#14) | Yes (3 of 3 videos; video 1 timed about 3 min) | Yes (created a user and group, signed in; read-only check of group inheritance) | Yes (console and CLI agree: policy attached via the group, none direct) | Not yet (explained in session; confirm at a later recall) | About 20 to 25 min, learner's estimate, only video 1 timed | Recall #14, #15, #16 on different days. Notes in `AWS_Course/notes/S04-B01.md` |
 | S03-B01 (Udemy) | 2026-10-20 to 2026-10-21 | 5/5 (single 3/3, multi 2/2), no guesses | No quiz misses. Prediction miss: IAM vs Lambda scope (#14). Check gaps: how to choose a Region (#10, then right in the quiz), edge vs Region (#10), regional resources per Region (right in Q2 and the exercise) | Yes (videos 1 and 3; video 2 skipped as administrative) | Yes (console tour: Global vs Region label for four services, switched Ohio and back) | Yes (learner's own observations of the console and VPC list) | Not yet (explained in session; confirm at a later recall) | About 30 to 40 min, estimated and not timed: videos about 8.5 min at 1.5x and 1.25x speed (calculated), review about 20 to 30 min (learner's estimate) | Recall #14 and #10 on a different day. Notes saved in `AWS_Course/notes/S03-B01.md` |
 | M01-B01 | 2026-10-18 to 2026-10-19 | 2/5 (single 2/3, multi 0/2) | Region choice vs edge locations (#10), shared responsibility by service (#11, assisted fresh check right), redundancy vs failure domain (#12), HA vs FT (#13, Q1 right) | Yes | Yes (guided; inspected AZs, created and deleted one subnet in `run02x-vpc`) | Yes (CLI check, cleanup, all-region sweep) | No (explained with assistance; revisit later) | Not recorded | Recall: why subnet CIDRs can't overlap across AZs; recall: match redundancy to failure domain. Then M01-B02 |
 
@@ -101,6 +109,27 @@ One block per logged block, added when it's logged:
 |---|---|---|---|---|---|---|
 | 1 | single / multi (pick N) | ... | ... | ... | right / wrong / partial / guessed | hint used? |
 ```
+
+### S04-B01 IAM users, groups, and policies (Udemy, 2026-10-21 to 2026-10-22)
+First-attempt score **5/5** (single-answer 3/3, multi-select 2/2), no guesses marked. Logged 2026-10-22.
+
+| Q | Type | Topic | My answer + reason | Correct answer | First attempt | Notes |
+|---|---|---|---|---|---|---|
+| 1 | single | Add a new developer to an existing team | C: group assignment is best practice for efficiency and security | C | right | Reasoning sound |
+| 2 | multi (pick 2) | Group rules | D, E: groups contain only users; a user can belong to several groups | D, E | right | Reasoning sound |
+| 3 | single | Spotting root from the console header | A: only an account ID means root, which is not best practice | A | right | Slightly over-inferred that no user exists |
+| 4 | multi (pick 2) | Least privilege for a contractor | B, D: only needed access; shut it down after two weeks | B, D | right | Reasoning sound |
+| 5 | single | Two accounts open at once | D: multi-session support lets one browser hold different accounts | D | right | Reasoning sound |
+
+Per-video checks: video 1 recall correct on users, groups, least privilege and root, but called access "temporary" and omitted policies and "groups contain only users" (#16); group purpose answered correctly. Video 2 recall described the create-user, create-group and inheritance steps; account alias purpose missed (#15). Video 3 recall correct on multi-session support; purpose connected to the private-window workaround.
+
+Read-only verification (console report plus CLI): the user's policy is attached via the group, with nothing attached directly. Session recall (global vs regional): 5 of 6 right, CloudFront missed (#14).
+
+Learner reflection, in my own words (verbatim):
+1. Gain a better understanding with Users, Groups and how someone managing IAM would use best practices with permissions and provision access.
+2. Created a user account from my root account. Create a group and set the permissions/access to AdminAccess. Added a user to the group and checked permissions that the user had after being assigned to the group.
+3. Going in the user we seen that the policy was set to AdminAcess it was Attached via Group Admin. Meaning the AdminAccess permissions came from being assigned the the admin group. From IAM User groups and selecting admin then selecting permision we can see the policy in this group is AdminAccess, meaning users added to this group adopt the AdminAccess policy.
+4. Just best practices for efficiency for granting access for new users without having to manage them individually and for security protection being able to remove users in case one is compromised.
 
 ### S03-B01 Getting started with AWS (Udemy, 2026-10-20 to 2026-10-21)
 First-attempt score **5/5** (single-answer 3/3, multi-select 2/2), no guesses marked. Logged 2026-10-21.
@@ -155,6 +184,7 @@ Four separate statuses (`WORKFLOW.md`, section 5): Watched, Practiced, Verified,
 
 | Block | Exercise | Type (Udemy lesson / lab reuse / extension / new / design) | Where (folder) | Practiced | Verified | Independently explained | Guided or independent | Cleanup | Unresolved |
 |---|---|---|---|---|---|---|---|---|---|
+| S04-B01 | Udemy hands-on (create a user and group, sign in), then a predict-then-check on my own account: is the admin policy attached directly or via the group (read-only, $0) | Udemy hands-on lesson plus a read-only verification | None (no files; study notes in `AWS_Course/notes/S04-B01.md`) | Yes | Yes (console and CLI agree) | Not yet | Guided | Nothing to delete; the user and group are kept as my real admin setup. All-region billable sweep clean 2026-10-22 | Why a group edit affects every member; account alias purpose (#15) |
 | S03-B01 | Console tour: predict then check Global vs Region label for IAM, EC2, Route 53, Lambda; switch to Ohio and compare the VPC list; switch back | Udemy hands-on lesson, extended with a predict-then-check task (read-only, $0) | None (no files; study notes in `AWS_Course/notes/S03-B01.md`) | Yes | Yes (my own observations) | Not yet | Guided | Nothing created; console switched back to N. Virginia | Whether a signed-out console returns to the last Region (AWS docs say yes unless IAM Identity Center is used); default Region setting still to do |
 | M01-B01 | Find the single point of failure in `run02x-vpc`: read each subnet's AZ, predict the impact of an AZ outage, create `m01-subnet-1b` (`10.0.7.0/24`, us-east-1b), explain why a subnet is one AZ, delete it | Extension of lab 01 plus a design discussion | `01-vpc-basics/` (my reflection is pending; to be pasted by me into that README) | Yes | Yes (CLI check of the subnet) | No | Guided | Done; all-region sweep clean 2026-10-19 | Why subnet CIDRs can't overlap across AZs (revisit #8) |
 
@@ -166,6 +196,7 @@ parked here.
 | Topic | Came up in | Question | Expected lesson |
 |---|---|---|---|
 | Edge locations and Local Zones, and whether they matter when choosing a Region | S03-B01, my own question | Edge locations are not a Region-choice factor; Local Zones put a Region closer to big cities for latency. Details not yet taught | The instructor says edge locations come in the global section, around the middle of the course |
+| Multi-account strategies (many accounts for test, production and so on) | S04-B01, multi-session support video | Multi-session support makes switching between accounts easy; how companies organize many accounts is not yet taught | Later in the course, not yet identified |
 
 ## Resume point
 
@@ -184,6 +215,8 @@ Where to pick up if a block was interrupted.
 
 - **2026-10-21, to do for me:** set the console's default Region to N. Virginia (gear icon, user settings), so every sign-in starts where the repo labs live.
 
+- **2026-10-22, to do for me:** review the CLI user's credentials (see the discussion in chat) and plan a least-privilege CLI identity for lab 08. Add a second kind of MFA to my admin user and root so one lost device is not a lockout.
+
 ## Exam pacing
 
 | Item | Value |
@@ -195,6 +228,8 @@ Where to pick up if a block was interrupted.
 | First-pass finish | Re-estimate after the first two Udemy blocks. The earlier Nov 7 to 10 target was set for the Percipio course length and no longer stands |
 | Days from 2026-10-15 to Nov 7 / Nov 10 / Nov 20 | 23 / 26 / 36 |
 | Observed time per block | Percipio M01-B01: not recorded. **Udemy S03-B01: about 30 to 40 min, estimated and not timed** (videos about 8.5 min at 1.5x and 1.25x, review about 20 to 30 min). Time the next block with a phone timer to get a measured number |
+| Udemy S04-B01 | About 20 to 25 min, learner's estimate, only video 1 timed. Listed video time is 11:33 plus checks, quiz, practical and reflection, so this is probably an underestimate |
+| Udemy pace so far | Two blocks, both estimated and not timed (S03-B01 about 30 to 40 min, S04-B01 about 20 to 25 min). Not enough to project the course. Needs the course's total video minutes and one properly timed block |
 | Playback speed | 1.25x worked best for understanding; 1.5x was fine for material already familiar |
 | Estimated remaining workload | *(not yet known)* |
 | Gap to first-pass target | *(not yet known)* |
@@ -205,13 +240,13 @@ Where to pick up if a block was interrupted.
 | Metric | Value |
 |---|---|
 | Percipio modules completed | 0 |
-| Udemy blocks completed | 1 |
+| Udemy blocks completed | 2 |
 | Blocks completed | 1 |
-| Questions answered (first attempt) | 10 (Percipio 5, Udemy 5) |
-| Overall first-attempt accuracy | 7/10 (70%); Udemy so far 5/5 (a repeat topic from Percipio) |
-| Single-answer accuracy | 5/6 (83%) |
-| Multi-select accuracy | 2/4 (50%) |
+| Questions answered (first attempt) | 15 (Percipio 5, Udemy 10) |
+| Overall first-attempt accuracy | 12/15 (80%); Udemy so far 10/10 (both blocks repeat material seen in Percipio or earlier) |
+| Single-answer accuracy | 8/9 (89%) |
+| Multi-select accuracy | 4/6 (67%) |
 | Blocks under 4/5 | 1 (M01-B01) |
-| Open revisit items | 5 |
+| Open revisit items | 7 |
 | Reviewing | 9 |
 | Solid | 0 |

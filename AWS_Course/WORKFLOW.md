@@ -137,6 +137,13 @@ from evidence -> **learner explains** -> clean up.
   **Never mark independent mastery when the learner followed supplied steps.**
 - Stay within the block. Briefly explain an essential prerequisite; defer unrelated topics and
   larger integrations (listed under **Later in the course** in `log.md`).
+- **Heads-up before risky lessons (learner's standing request, 2026-10-21).** Before the learner
+  watches or follows any lesson with a risky hands-on, Claude says so first and gives specifics:
+  what to avoid (root, the working `cli-admin` identity and default CLI profile, existing MFA,
+  real passwords, access keys in chat, screenshots, or the repo), what to use instead (a test IAM
+  user, a named CLI profile), and what to delete afterward. Typical triggers: MFA, access keys and
+  the CLI, root-user steps, deleting or changing identities, anything that can lock the learner
+  out, cost money, or expose an account ID.
 - **AWS permissions, cost checks, cleanup, and billable-resource verification are unchanged**
   (`instructions.md`, "Cost safety"). The learner operates AWS; Claude does not provision or
   delete resources without the required authorization. State costs and prerequisites first.
@@ -165,6 +172,9 @@ from evidence -> **learner explains** -> clean up.
 - **Logging approval:** ask **once, consolidated**, at the end of a block or session, after the
   study notes. One request covers the block result, exercise status, revisit changes, time, and resume point.
   Don't ask repeatedly. Nothing is written without a yes.
+- **Time reminder (learner's request, 2026-10-21):** the learner times each block with a phone timer.
+  If the time isn't shared by the time the consolidated logging request is made, Claude reminds
+  them to add it, and records it as "not timed" only if they say they don't have it.
 - **Revisit statuses** are unchanged (Open, Reviewing, Solid; Solid needs two clean recalls on
   different days with no hints). Never claim later-day understanding unless it happened.
 

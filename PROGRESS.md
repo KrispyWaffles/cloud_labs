@@ -192,11 +192,24 @@ any lab touching EC2/RDS/NAT Gateway.
 - Added the **study notes** step to the workflow (copy-friendly notes for Google Docs, saved in
   `AWS_Course/notes/`). First set: `AWS_Course/notes/S03-B01.md`.
 
+## 2026-10-21 to 10-22 — Udemy S04-B01 (IAM users, groups, policies)
+
+- Planned Section 4 (IAM & AWS CLI, 20 lectures, 57 min) into five blocks. Ran S04-B01: IAM
+  introduction, users and groups hands-on, multi-session sign-in. **5/5 first attempt**, no
+  guesses. Foundational and a repeat topic, so a strong score was expected.
+- Practical: created a user and group in the console, then a predict-then-check on my own
+  account (policy attached via the group, none direct), confirmed from the CLI.
+- Added two standing workflow rules: a heads-up before risky lessons (MFA, access keys and the
+  CLI, root, deleting identities) and a reminder to share block time.
+- New revisit items #15 (account alias purpose) and #16 (user access is long-term, temporary
+  credentials come from roles). #14 (global vs regional) still Open after a recall of 5 of 6.
+- Time about 20 to 25 min, estimated. Only video 1 was timed.
+
 ## Next up
 
-0. Next Udemy section: send its expanded screenshot (the course list shows IAM & AWS CLI after
-   this one) so its blocks can be planned. Time that block with a phone timer. Set the console's
-   default Region to N. Virginia.
+0. S04-B02 (IAM Policies, Policies Hands On, MFA Overview, MFA Hands On). Heads-up first: do the
+   MFA hands-on on a test user, never on root, and keep existing MFA methods. Time the block
+   with a phone timer.
 1. Start the next session with delayed recall: explain what makes a subnet public,
    before seeing any notes.
 2. One concept: what a NAT gateway does to the source address of an outgoing request,
