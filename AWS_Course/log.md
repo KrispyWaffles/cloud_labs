@@ -41,8 +41,13 @@ silently, and nothing is recorded as done that wasn't.
 | 12 | Match redundancy to the failure domain (N+1 = server, multi-AZ = AZ, multi-Region = Region) | Chose a same-AZ extra instance to survive an AZ outage (M01-B01 Q4) | M01-B01, 2026-10-18 | 1 | Reviewing | Right on first attempt in S03-B01 Q3 (2026-10-21). One more clean recall on a different day: which design survives a server, an AZ, a Region failing? |
 | 13 | High availability vs fault tolerance | Blurred the two in the video check; then got M01-B01 Q1 right on first attempt | M01-B01, 2026-10-18 | 1 | Reviewing | Recall 2026-10-19: definitions right, cost needed a prompt. One more clean recall including cost |
 | 14 | Which services are global vs regional (IAM and Route 53 global; EC2 and Lambda regional) | In the S03-B01 exercise predicted IAM regional and Lambda global; the console showed the opposite. Explained global vs regional scope correctly afterwards | S03-B01, 2026-10-21 | 2 | Open | Another recall on a different day with no notes. 2026-10-22 recall: 5 of 6 right; put CloudFront as regional while unsure (it is global) |
-| 15 | Account alias: a friendly, unique sign-in URL in place of the 12-digit account ID (not a security control) | Answered the alias purpose question with a different idea (removing a compromised user), then learned the real purpose | S04-B01, 2026-10-22 | 1 | Open | Recall on a different day: what problem does an account alias solve, and what does it not hide? |
+| 15 | Account alias: a friendly, unique sign-in URL in place of the 12-digit account ID (not a security control) | Answered the alias purpose question with a different idea (removing a compromised user), then learned the real purpose | S04-B01, 2026-10-22 | 1 | Reviewing | Recall 2026-10-26 was right (friendlier sign-in URL; account ID still shows after sign-in), with wording fixes. One more clean recall on a different day |
 | 16 | IAM user and group access is long-term; temporary credentials come from roles | Described user and group access as temporary in the video check | S04-B01, 2026-10-22 | 1 | Open | Confirm at S04-B04 (roles): which identities get temporary credentials, and why |
+| 17 | Policy structure: Version, Id, Statement (Sid, Effect, Principal, Action, Resource, Condition) | Could not list the policy parts in the video 1 recall and the video 4 gaps; can read a policy with wildcards | S04-B02, 2026-10-24 | 1 | Open | Recall on a different day: name the parts, and say which four matter for the exam |
+| 18 | Inline policy vs a managed policy attached directly | Was unsure of the difference; chose the managed-policy-on-groups answer correctly in the quiz | S04-B02, 2026-10-26 | 1 | Reviewing | Recall on a different day: which is reusable, and which is deleted with its user |
+| 19 | MFA device types and which are physical (virtual app, U2F security key, hardware key fob, GovCloud key fob) | Picked the virtual app for a question that required a physical device (S04-B02 Q5); the fresh check afterwards was right | S04-B02, 2026-10-26 | 1 | Reviewing | Recall on a different day: name the four types and say which are physical |
+| 20 | A password policy cannot require MFA; MFA is a separate per-identity control | Wrote in the reflection that password policies can require two-factor authentication | S04-B02, 2026-10-26 | 1 | Open | Recall on a different day: what does a password policy control, and what does it not? |
+| 21 | Reading the question's decisive requirement instead of answering the one I expected | Same pattern in Percipio M01-B01 (Q2 to Q4) and S04-B02 Q5 (answered for a different requirement than 'physical') | M01-B01, 2026-10-18 | 2 | Open | Before choosing, underline the word that decides it in the question. Track whether it recurs |
 
 *Seeded 2026-10-14 from `PROGRESS.md` and lab Q&A results. Edit anything that doesn't
 match my own sense of where I'm stuck.*
@@ -60,7 +65,7 @@ mapped separately where the exam guide supports it (`WORKFLOW.md`, section 9).
 |---|---|---|---|---|---|
 | S03-B01 | Section 3: Getting started with AWS (3 lectures, 13 min; sections 1 and 2 were intro and code/slides download, skipped as administrative) | 1. AWS Cloud Overview - Regions & AZ (8:01)<br>2. [Important] AWS Console UI Update (1:14, administrative: no check)<br>3. Tour of the AWS Console & Services in AWS (3:52, hands-on demo) | Explain what AWS Regions, Availability Zones and edge locations are and how to choose a Region; get oriented in the console and tell global services from regional ones | Task 1.1 and Task 2.2 (global infrastructure: Regions, Availability Zones). Foundations only; overlaps Percipio M01-B01 | Complete, logged 2026-10-21 |
 | S04-B01 | Section 4: IAM & AWS CLI (20 lectures, 57 min; plus a section quiz) | 1. IAM Introduction: Users, Groups, Policies (3:22)<br>2. IAM Users & Groups Hands On (6:23, Udemy hands-on)<br>3. AWS Console Simultaneous Sign-in (1:48) | Explain what IAM users and groups are, why you create them instead of using root, and how to sign in as an IAM user | Task 1.1 (IAM users, groups, roles and policies; applying best practices to IAM and root users) | Complete, logged 2026-10-22 |
-| S04-B02 | Section 4 | 4. IAM Policies (2:50)<br>5. IAM Policies Hands On (8:01, Udemy hands-on)<br>6. IAM MFA Overview (4:10)<br>7. IAM MFA Hands On (4:01, Udemy hands-on) | Explain how policies decide what an identity may do (least privilege) and how MFA proves who it is | Task 1.1 (policy-based authorization, least privilege, MFA on root and IAM users) | Planned |
+| S04-B02 | Section 4 | 4. IAM Policies (2:50)<br>5. IAM Policies Hands On (8:01, Udemy hands-on)<br>6. IAM MFA Overview (4:10)<br>7. IAM MFA Hands On (4:01, Udemy hands-on) | Explain how policies decide what an identity may do (least privilege) and how MFA proves who it is | Task 1.1 (policy-based authorization, least privilege, MFA on root and IAM users) | Complete, logged 2026-10-26 |
 | S04-B03 | Section 4 | 8. AWS Access Keys, CLI and SDK (4:03)<br>12. AWS CLI Hands On (3:50, Udemy hands-on)<br>14. AWS CloudShell (3:53)<br>Setup videos 9 to 11 (Windows 1:45, Mac OS X 1:28, Linux 1:30) skipped as administrative; the 0:12 CloudShell Region Availability item is a short read | Explain how access keys, the CLI and SDKs let code and people call AWS, and when CloudShell is the easier option | Task 1.2 (application configuration and credentials security, from its knowledge list). Foundations only | Planned |
 | S04-B04 | Section 4 | 15. IAM Roles for AWS Services (1:39)<br>16. IAM Roles Hands On (2:05, Udemy hands-on)<br>17. IAM Security Tools (0:54)<br>18. IAM Security Tools Hands On (2:23, Udemy hands-on) | Explain why AWS services use roles instead of stored keys, and which IAM tools show who can do what | Task 1.1 (roles, role-based access, access visibility) | Planned |
 | S04-B05 | Section 4 (section close) | 19. IAM Best Practices (1:29)<br>20. IAM Summary (1:05, wrap-up)<br>IAM & AWS CLI Quiz (Udemy section quiz) | Pull the IAM ideas together as a short best-practices checklist | Task 1.1 (security best practices). Practical to be decided: a read-only self-check of my own account against the checklist | Planned |
@@ -93,6 +98,7 @@ separately.
 
 | Block | Date | First-attempt score | Missed / guessed / assisted concepts (revisit #) | Watched | Practiced | Verified | Independently explained | Time (approx.) | Next review action |
 |---|---|---|---|---|---|---|---|---|---|
+| S04-B02 (Udemy) | 2026-10-23 to 2026-10-26 | 4/5 (single 2/3, multi 2/2); Q2 partly unsure | Q5: physical vs virtual MFA (#19, then right on a fresh check) and reading the stem (#21). Check gaps: policy parts (#17), inline vs direct (#18), password policy vs MFA (#20). Recall: account alias right (#15) | Yes (4 of 4 videos; times 3:56, about 18 min with the hands-on, 3:20, one untimed) | Yes (policies hands-on; MFA setup followed on my side; cleanup of the extra group and policy) | Yes (CLI: no leftover groups or policies, root MFA on, admin user's policy via group only) | Not yet (explained in session; confirm at a later recall) | 20 to 25 min, learner's estimate. Likely an underestimate: videos 1 to 3 alone were about 25 min | Recall #17 to #21 on different days. Notes in `AWS_Course/notes/S04-B02.md` |
 | S04-B01 (Udemy) | 2026-10-21 to 2026-10-22 | 5/5 (single 3/3, multi 2/2), no guesses | No quiz misses. Check gaps: policies not mentioned, "temporary" access (#16), account alias purpose (#15). Session recall: global vs regional 5 of 6 (#14) | Yes (3 of 3 videos; video 1 timed about 3 min) | Yes (created a user and group, signed in; read-only check of group inheritance) | Yes (console and CLI agree: policy attached via the group, none direct) | Not yet (explained in session; confirm at a later recall) | About 20 to 25 min, learner's estimate, only video 1 timed | Recall #14, #15, #16 on different days. Notes in `AWS_Course/notes/S04-B01.md` |
 | S03-B01 (Udemy) | 2026-10-20 to 2026-10-21 | 5/5 (single 3/3, multi 2/2), no guesses | No quiz misses. Prediction miss: IAM vs Lambda scope (#14). Check gaps: how to choose a Region (#10, then right in the quiz), edge vs Region (#10), regional resources per Region (right in Q2 and the exercise) | Yes (videos 1 and 3; video 2 skipped as administrative) | Yes (console tour: Global vs Region label for four services, switched Ohio and back) | Yes (learner's own observations of the console and VPC list) | Not yet (explained in session; confirm at a later recall) | About 30 to 40 min, estimated and not timed: videos about 8.5 min at 1.5x and 1.25x speed (calculated), review about 20 to 30 min (learner's estimate) | Recall #14 and #10 on a different day. Notes saved in `AWS_Course/notes/S03-B01.md` |
 | M01-B01 | 2026-10-18 to 2026-10-19 | 2/5 (single 2/3, multi 0/2) | Region choice vs edge locations (#10), shared responsibility by service (#11, assisted fresh check right), redundancy vs failure domain (#12), HA vs FT (#13, Q1 right) | Yes | Yes (guided; inspected AZs, created and deleted one subnet in `run02x-vpc`) | Yes (CLI check, cleanup, all-region sweep) | No (explained with assistance; revisit later) | Not recorded | Recall: why subnet CIDRs can't overlap across AZs; recall: match redundancy to failure domain. Then M01-B02 |
@@ -109,6 +115,31 @@ One block per logged block, added when it's logged:
 |---|---|---|---|---|---|---|
 | 1 | single / multi (pick N) | ... | ... | ... | right / wrong / partial / guessed | hint used? |
 ```
+
+### S04-B02 IAM policies and MFA (Udemy, 2026-10-23 to 2026-10-26)
+First-attempt score **4/5** (single-answer 2/3, multi-select 2/2). Q2 was right but partly unsure (E). Logged 2026-10-26.
+
+| Q | Type | Topic | My answer + reason | Correct answer | First attempt | Notes |
+|---|---|---|---|---|---|---|
+| 1 | single | Removing a user from their only group | C: permissions came from the group, so they leave with it; the user stays | C | right | Reasoning sound |
+| 2 | multi (pick 2) | Reading a policy with s3:Get* and s3:List* | B, E: the wildcard covers actions starting with Get or List; E was a partly unsure pick | B, E | right (partly unsure) | Called it IAM read-only; it is S3 read access |
+| 3 | single | One policy for 40 users, changeable in one place | D: one managed policy attached to groups is the most efficient | D | right | Reasoning sound |
+| 4 | multi (pick 2) | Responding to a leaked password | A, C: reset the password first, then add MFA | A, C | right | Reasoning sound |
+| 5 | single | A physical MFA option without one key per user | A: virtual MFA app, because it needs no extra object | B | wrong | Missed "physical" in the question (#19, #21) |
+
+Fresh check after Q5 (not scored): "which is NOT a physical device" answered C (virtual MFA app) correctly, with sound reasoning.
+
+Per-video checks: video 1 recalled inheritance across two groups, inline access, and part of the policy structure (could not list the parts); inline policy purpose answered well. Video 2 recalled the three ways a permission arrives and the visual builder; wildcard purpose answered correctly. Video 3 recalled password policy and MFA with the device types; "VPN keys" corrected to key fobs; policy-vs-MFA contrast answered correctly. Video 4 recalled the password policy settings and the root MFA steps; more than one MFA device answered well, with a plan to add a second method.
+
+Session recall (account alias): right, with two wording corrections (#15).
+
+Read-only verification (CLI): no `devs` group or `test-policy` left; only the `admin` group; the admin user's policy comes through the group with nothing direct or inline; root MFA enabled. No custom password policy is set.
+
+Learner reflection, in my own words (verbatim):
+1. gaining more understanding about policies, groups, security practices, with two-factor authentications, or multi-factor authentications, whether it be hardware, YubiKeys, key fobs, or authentication apps. So overall, just best practices for permissions and access securing accounts and minimizing security risks and following least privilege practices.
+2. So for policies that open the door for certain permissions, I can create policies where I can assign them directly to users. Or I can create a group that has policies configured for the group that can grant access to users assigned to that group. For password policies, we have a lot of customization options as far as password length, characters, number of characters, special characters, numbers, etc. Rotating password or resetting passwords after a certain amount of days, and also not allowing the use of old passwords.
+3. when removing a user from a group, their access was denied because the policies from the group gave the user access to those permissions. Also, when assigning only read-only access, we were not able to create a user group with the user account because the user account is only assigned read-only access. So we got a denied message in there. Also, with password policies requiring two-factor authentication and dynamic password requirements, is something that you can make mandatory for creating user accounts. It's best practices, so things are more secure if a user's credentials may be compromised.
+4. permissions and policies and IAM management and security hopefully behave in a way with least privilege security in mind. Mitigating risks in case credentials are compromised. When practices are not followed and things are sloppy or messy, security can be compromised. Not removing old policies or unused groups, not making dynamic passwords mandatory for user accounts, as well as two-factor authentication or multi-factor authentication. removing one off users from inline policies. Or even direct policies. For minimum privilege practices to make sure things stay secured and there's no extended backdoor with old access that may have been forgotten or and not taken care of..
 
 ### S04-B01 IAM users, groups, and policies (Udemy, 2026-10-21 to 2026-10-22)
 First-attempt score **5/5** (single-answer 3/3, multi-select 2/2), no guesses marked. Logged 2026-10-22.
@@ -184,6 +215,7 @@ Four separate statuses (`WORKFLOW.md`, section 5): Watched, Practiced, Verified,
 
 | Block | Exercise | Type (Udemy lesson / lab reuse / extension / new / design) | Where (folder) | Practiced | Verified | Independently explained | Guided or independent | Cleanup | Unresolved |
 |---|---|---|---|---|---|---|---|---|---|
+| S04-B02 | Udemy hands-ons (policies and MFA), then read-only CLI verification of the cleanup (no leftover test group or policy, root MFA on) | Udemy hands-on lessons plus a read-only verification | None (no files; study notes in `AWS_Course/notes/S04-B02.md`) | Yes | Yes (CLI) | Not yet | Guided | The extra group and policy were deleted before verification; nothing new created | Policy parts and inline vs direct (#17, #18); a custom password policy is not set (optional) |
 | S04-B01 | Udemy hands-on (create a user and group, sign in), then a predict-then-check on my own account: is the admin policy attached directly or via the group (read-only, $0) | Udemy hands-on lesson plus a read-only verification | None (no files; study notes in `AWS_Course/notes/S04-B01.md`) | Yes | Yes (console and CLI agree) | Not yet | Guided | Nothing to delete; the user and group are kept as my real admin setup. All-region billable sweep clean 2026-10-22 | Why a group edit affects every member; account alias purpose (#15) |
 | S03-B01 | Console tour: predict then check Global vs Region label for IAM, EC2, Route 53, Lambda; switch to Ohio and compare the VPC list; switch back | Udemy hands-on lesson, extended with a predict-then-check task (read-only, $0) | None (no files; study notes in `AWS_Course/notes/S03-B01.md`) | Yes | Yes (my own observations) | Not yet | Guided | Nothing created; console switched back to N. Virginia | Whether a signed-out console returns to the last Region (AWS docs say yes unless IAM Identity Center is used); default Region setting still to do |
 | M01-B01 | Find the single point of failure in `run02x-vpc`: read each subnet's AZ, predict the impact of an AZ outage, create `m01-subnet-1b` (`10.0.7.0/24`, us-east-1b), explain why a subnet is one AZ, delete it | Extension of lab 01 plus a design discussion | `01-vpc-basics/` (my reflection is pending; to be pasted by me into that README) | Yes | Yes (CLI check of the subnet) | No | Guided | Done; all-region sweep clean 2026-10-19 | Why subnet CIDRs can't overlap across AZs (revisit #8) |
@@ -197,6 +229,7 @@ parked here.
 |---|---|---|---|
 | Edge locations and Local Zones, and whether they matter when choosing a Region | S03-B01, my own question | Edge locations are not a Region-choice factor; Local Zones put a Region closer to big cities for latency. Details not yet taught | The instructor says edge locations come in the global section, around the middle of the course |
 | Multi-account strategies (many accounts for test, production and so on) | S04-B01, multi-session support video | Multi-session support makes switching between accounts easy; how companies organize many accounts is not yet taught | Later in the course, not yet identified |
+| Resource-based policies (such as S3 bucket policies) and explicit Deny overriding Allow | S04-B02, policy structure video | Identity-based policies omit Principal and resource-based ones include it; an explicit Deny wins. Mentioned as supplemental only | Likely the S3 section |
 
 ## Resume point
 
@@ -217,6 +250,8 @@ Where to pick up if a block was interrupted.
 
 - **2026-10-22, to do for me:** review the CLI user's credentials (see the discussion in chat) and plan a least-privilege CLI identity for lab 08. Add a second kind of MFA to my admin user and root so one lost device is not a lockout.
 
+- **2026-10-26, optional:** set a custom password policy (raise the minimum length and require character types). Do not turn on expiration with administrator reset while one console admin exists, or I could lock myself out.
+
 ## Exam pacing
 
 | Item | Value |
@@ -229,7 +264,8 @@ Where to pick up if a block was interrupted.
 | Days from 2026-10-15 to Nov 7 / Nov 10 / Nov 20 | 23 / 26 / 36 |
 | Observed time per block | Percipio M01-B01: not recorded. **Udemy S03-B01: about 30 to 40 min, estimated and not timed** (videos about 8.5 min at 1.5x and 1.25x, review about 20 to 30 min). Time the next block with a phone timer to get a measured number |
 | Udemy S04-B01 | About 20 to 25 min, learner's estimate, only video 1 timed. Listed video time is 11:33 plus checks, quiz, practical and reflection, so this is probably an underestimate |
-| Udemy pace so far | Two blocks, both estimated and not timed (S03-B01 about 30 to 40 min, S04-B01 about 20 to 25 min). Not enough to project the course. Needs the course's total video minutes and one properly timed block |
+| Udemy S04-B02 | 20 to 25 min, learner's estimate. Likely an underestimate: videos 1 to 3 alone were about 25 min (one video 18 min with the hands-on), plus the checks, quiz, practical and reflection |
+| Udemy pace so far | Three blocks, all estimated and not fully timed (S03-B01 about 30 to 40 min, S04-B01 about 20 to 25 min, S04-B02 about 20 to 25 min, likely higher). Not enough to project the course. Needs the course's total video minutes and one properly timed block |
 | Playback speed | 1.25x worked best for understanding; 1.5x was fine for material already familiar |
 | Estimated remaining workload | *(not yet known)* |
 | Gap to first-pass target | *(not yet known)* |
@@ -240,13 +276,13 @@ Where to pick up if a block was interrupted.
 | Metric | Value |
 |---|---|
 | Percipio modules completed | 0 |
-| Udemy blocks completed | 2 |
+| Udemy blocks completed | 3 |
 | Blocks completed | 1 |
-| Questions answered (first attempt) | 15 (Percipio 5, Udemy 10) |
-| Overall first-attempt accuracy | 12/15 (80%); Udemy so far 10/10 (both blocks repeat material seen in Percipio or earlier) |
-| Single-answer accuracy | 8/9 (89%) |
-| Multi-select accuracy | 4/6 (67%) |
+| Questions answered (first attempt) | 20 (Percipio 5, Udemy 15) |
+| Overall first-attempt accuracy | 16/20 (80%); Udemy so far 14/15 |
+| Single-answer accuracy | 10/12 (83%) |
+| Multi-select accuracy | 6/8 (75%) |
 | Blocks under 4/5 | 1 (M01-B01) |
-| Open revisit items | 7 |
-| Reviewing | 9 |
+| Open revisit items | 9 |
+| Reviewing | 12 |
 | Solid | 0 |

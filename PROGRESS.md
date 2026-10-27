@@ -205,11 +205,26 @@ any lab touching EC2/RDS/NAT Gateway.
   credentials come from roles). #14 (global vs regional) still Open after a recall of 5 of 6.
 - Time about 20 to 25 min, estimated. Only video 1 was timed.
 
+## 2026-10-23 to 10-26 — Udemy S04-B02 (IAM policies and MFA)
+
+- Ran S04-B02: IAM Policies, Policies Hands On, MFA Overview, MFA Hands On. **4/5 first attempt**.
+  The one miss (Q5) was a stem-reading slip: answered for a virtual app when the question said
+  physical device. A fresh check afterwards was right. Same habit as Percipio M01-B01, now tracked
+  as revisit #21.
+- Verified read-only from the CLI that the hands-on cleanup is complete (no leftover group or
+  policy; root MFA on; admin user's policy only through the group).
+- Added `AWS_Course/notes/S04-B02.md`, rebuilt the Word study-notes doc (three blocks), and a
+  reusable ChatGPT prompt template for producing a polished PDF of all notes
+  (`AWS_Course/notes/_chatgpt-prompt-template.md`; the combined paste-ready file is git-ignored).
+- New revisit items #17 to #21; #15 (account alias) moved to Reviewing. Time about 20 to 25 min,
+  the learner's estimate, likely low.
+
 ## Next up
 
-0. S04-B02 (IAM Policies, Policies Hands On, MFA Overview, MFA Hands On). Heads-up first: do the
-   MFA hands-on on a test user, never on root, and keep existing MFA methods. Time the block
-   with a phone timer.
+0. S04-B03 (AWS Access Keys, CLI and SDK; AWS CLI Hands On; AWS CloudShell). Heads-up first: do
+   not run `aws configure` over the working default profile (use a named profile, or just watch),
+   never paste access keys anywhere, and do not touch the CLI user's credentials mid-lesson.
+   Time the block with a phone timer.
 1. Start the next session with delayed recall: explain what makes a subnet public,
    before seeing any notes.
 2. One concept: what a NAT gateway does to the source address of an outgoing request,

@@ -34,3 +34,6 @@ AWS_Course/AWS_SAA_guide/
 
 # Generated study-notes Word document (rebuild with: node scripts/build_notes_docx.js)
 AWS_Course/notes/*.docx
+
+# Generated: ChatGPT prompt plus all notes (regenerate from _chatgpt-prompt-template.md and the block notes)
+AWS_Course/notes/chatgpt-prompt-with-notes.md
