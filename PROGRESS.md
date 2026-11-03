@@ -219,12 +219,27 @@ any lab touching EC2/RDS/NAT Gateway.
 - New revisit items #17 to #21; #15 (account alias) moved to Reviewing. Time about 20 to 25 min,
   the learner's estimate, likely low.
 
+## 2026-10-28 to 11-03 — Udemy S04-B03 (access keys, CLI and SDK, CloudShell)
+
+- Ran S04-B03: Access Keys, CLI and SDK; AWS CLI Hands On; AWS CloudShell. **5/5 first attempt**, no
+  guesses. The block is tied to hands-ons I did, so a strong score was expected.
+- Practical (verified from the CLI each step): test user, key and named profile, then access denied
+  (exit 254) after detaching the policy, then full cleanup. Then a real **key rotation** on the CLI
+  user as the admin IAM user: freed a slot, created the new key, tested it in a temporary profile,
+  deactivated the old key (the default profile then failed with an invalid-token error), swapped the
+  profile names, deleted the old key.
+- Found and deleted old downloaded key files (CSVs) from Downloads; none were ever in the repo. Added
+  `.gitignore` rules for key-file names as a safety net. Screenshots of key status were reviewed and
+  were clean.
+- New revisit item #22 (alternatives to long-lived keys); #23 (authentication vs authorization) added
+  at Reviewing. Time about 90 to 120 min, estimated, including the rotation.
+
 ## Next up
 
-0. S04-B03 (AWS Access Keys, CLI and SDK; AWS CLI Hands On; AWS CloudShell). Heads-up first: do
-   not run `aws configure` over the working default profile (use a named profile, or just watch),
-   never paste access keys anywhere, and do not touch the CLI user's credentials mid-lesson.
-   Time the block with a phone timer.
+0. S04-B04 (IAM Roles for AWS Services, Roles Hands On, IAM Security Tools, Security Tools Hands On).
+   Heads-up first: create the role for a test purpose only, attach the narrowest policy (never
+   AdministratorAccess), and delete it afterward. Time the block with a phone timer. Also push any
+   unpushed commits.
 1. Start the next session with delayed recall: explain what makes a subnet public,
    before seeing any notes.
 2. One concept: what a NAT gateway does to the source address of an outgoing request,

@@ -16,6 +16,9 @@ id_rsa*
 id_ed25519*
 .aws/
 credentials
+*accessKeys*.csv
+*_credentials.csv
+rootkey.csv
 
 # Terraform state, backups, saved plans, local working dirs, variable files that may hold secrets
 *.tfstate
