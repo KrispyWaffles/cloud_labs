@@ -81,7 +81,8 @@ transcript ask exactly two questions, one at a time (what did I learn in 1 to 3 
 then one "what problem does X solve"); at block end give a combined summary and five scenario
 questions; every block gets one practical application (a relevant Udemy demo can count);
 finish with study notes: a block `.md` in `AWS_Course/notes/` and the running Word doc rebuilt from them
-(`node scripts/build_notes_docx.js`); document
+(`node scripts/build_notes_docx.js`) and the ChatGPT paste-ready file regenerated
+(`sh scripts/build_chatgpt_prompt.sh`); document
 the exercise and commit it only after the safety checks below. Labs always live in
 the repo root as numbered folders, never under `AWS_Course/`. `LAB.md` is Claude's
 instructions; a lab's `README.md` stays in my own words and Claude does not write it. Raw

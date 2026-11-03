@@ -141,6 +141,13 @@ The `.docx` is generated and git-ignored; the `.md` files and `scripts/build_not
 committed, only after the safety checks and only when you say so. Transcript text is never copied
 into the notes.
 
+After the Word doc is rebuilt, Claude also regenerates a ChatGPT paste-ready file
+(`AWS_Course/notes/chatgpt-prompt-with-notes.md`, from `sh scripts/build_chatgpt_prompt.sh`): the
+prompt template plus every block note, so you can paste it into ChatGPT desktop for a polished PDF.
+It is git-ignored. To add only the newest block to a document ChatGPT already made, attach that
+block's `.md` and paste `_chatgpt-append-prompt.md`. The order at the end of a block is: notes `.md`,
+Word doc, ChatGPT file, then the one consolidated logging request.
+
 ## 6. Git protections
 
 Full procedure in `instructions.md` ("Commit and push safety"). In short:

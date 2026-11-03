@@ -226,6 +226,15 @@ for the block**, for the learner to paste into a Google Doc and use for referenc
 - **Word format:** Arial 12 pt body, bold headings (Heading 1 at 16 pt, Heading 2 at 14 pt), real
   bullets and numbered lists, Letter size, page numbers in the footer.
 - A Google Docs-ready `.html` is no longer produced by default; Claude makes one only if asked.
+- **ChatGPT paste-ready file (added 2026-11-03):** after the block's notes are written and the Word doc is
+  rebuilt, Claude also regenerates `AWS_Course/notes/chatgpt-prompt-with-notes.md` with
+  `sh scripts/build_chatgpt_prompt.sh`. It is the ChatGPT prompt template (`_chatgpt-prompt-template.md`)
+  followed by every block note, so the learner can copy it into ChatGPT desktop for a polished PDF. It is
+  git-ignored. To add only the newest block to a document ChatGPT already made, the learner attaches that
+  block's `.md` and pastes `_chatgpt-append-prompt.md`. Claude checks the generated file for account IDs,
+  keys, and IPs before saying it is ready.
+- **Order at the end of a block:** study notes `.md`, rebuild the Word doc, regenerate the ChatGPT file, then
+  the one consolidated logging request.
 - Notes files are committed only after the safety checks, and only when the learner says so.
 
 ## 7. Scope control
