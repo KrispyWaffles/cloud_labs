@@ -19,6 +19,8 @@ credentials
 *accessKeys*.csv
 *_credentials.csv
 rootkey.csv
+*credential_report*.csv
+status_reports_*.csv
 
 # Terraform state, backups, saved plans, local working dirs, variable files that may hold secrets
 *.tfstate

@@ -42,14 +42,17 @@ silently, and nothing is recorded as done that wasn't.
 | 13 | High availability vs fault tolerance | Blurred the two in the video check; then got M01-B01 Q1 right on first attempt | M01-B01, 2026-10-18 | 1 | Reviewing | Recall 2026-10-19: definitions right, cost needed a prompt. One more clean recall including cost |
 | 14 | Which services are global vs regional (IAM and Route 53 global; EC2 and Lambda regional) | In the S03-B01 exercise predicted IAM regional and Lambda global; the console showed the opposite. Explained global vs regional scope correctly afterwards | S03-B01, 2026-10-21 | 2 | Open | Another recall on a different day with no notes. 2026-10-22 recall: 5 of 6 right; put CloudFront as regional while unsure (it is global) |
 | 15 | Account alias: a friendly, unique sign-in URL in place of the 12-digit account ID (not a security control) | Answered the alias purpose question with a different idea (removing a compromised user), then learned the real purpose | S04-B01, 2026-10-22 | 1 | Reviewing | Recall 2026-10-26 was right (friendlier sign-in URL; account ID still shows after sign-in), with wording fixes. One more clean recall on a different day |
-| 16 | IAM user and group access is long-term; temporary credentials come from roles | Described user and group access as temporary in the video check | S04-B01, 2026-10-22 | 1 | Open | Confirm at S04-B04 (roles): which identities get temporary credentials, and why |
+| 16 | IAM user and group access is long-term; temporary credentials come from roles | Described user and group access as temporary in the video check | S04-B01, 2026-10-22 | 1 | Reviewing | Answered in S04-B04: a role gives a service credentials without a stored key, and S04-B04 Q1 was right on first attempt. One more clean recall on a different day: where do temporary credentials come from? |
 | 17 | Policy structure: Version, Id, Statement (Sid, Effect, Principal, Action, Resource, Condition) | Could not list the policy parts in the video 1 recall and the video 4 gaps; can read a policy with wildcards | S04-B02, 2026-10-24 | 1 | Open | Recall on a different day: name the parts, and say which four matter for the exam |
 | 18 | Inline policy vs a managed policy attached directly | Was unsure of the difference; chose the managed-policy-on-groups answer correctly in the quiz | S04-B02, 2026-10-26 | 1 | Reviewing | Recall on a different day: which is reusable, and which is deleted with its user |
 | 19 | MFA device types and which are physical (virtual app, U2F security key, hardware key fob, GovCloud key fob) | Picked the virtual app for a question that required a physical device (S04-B02 Q5); the fresh check afterwards was right | S04-B02, 2026-10-26 | 1 | Reviewing | Recall on a different day: name the four types and say which are physical |
-| 20 | A password policy cannot require MFA; MFA is a separate per-identity control | Wrote in the reflection that password policies can require two-factor authentication | S04-B02, 2026-10-26 | 1 | Open | Recall on a different day: what does a password policy control, and what does it not? |
-| 21 | Reading the question's decisive requirement instead of answering the one I expected | Same pattern in Percipio M01-B01 (Q2 to Q4) and S04-B02 Q5 (answered for a different requirement than 'physical') | M01-B01, 2026-10-18 | 2 | Open | Before choosing, underline the word that decides it in the question. Track whether it recurs. S04-B03: no recurrence (5/5) |
+| 20 | A password policy cannot require MFA; MFA is a separate per-identity control | Wrote in the reflection that password policies can require two-factor authentication | S04-B02, 2026-10-26 | 2 | Open | Missed again in S04-B05 Q5 (picked the password policy as the way to require MFA); the fresh check afterwards was right. Recall on a different day: what does a password policy control, and what does it not? |
+| 21 | Reading the question's decisive requirement instead of answering the one I expected | Same pattern in Percipio M01-B01 (Q2 to Q4) and S04-B02 Q5 (answered for a different requirement than 'physical') | M01-B01, 2026-10-18 | 3 | Open | Underline the word that decides it in the question. Recurred in S04-B05 Q5 (answered with the audit tool when the question asked what to do). No recurrence in S04-B03 or S04-B04 |
 | 22 | The recommended alternatives to long-lived keys (CloudShell, CLI with IAM Identity Center) exist to avoid stored keys | Answered the alternatives question backwards in the S04-B03 video 2 check, describing the benefit of long-lived keys | S04-B03, 2026-11-02 | 1 | Open | Recall on a different day: what problem do the alternatives solve, and why are long-lived keys the risk? |
 | 23 | Authentication vs authorization (the access key authenticates; the policy authorizes) | Session recall 2026-11-02 was partial (said MFA is authentication and did not say that an access key handles it); then S04-B03 Q5 was right on first attempt | S04-B03, 2026-11-02 | 1 | Reviewing | One more clean recall on a different day: define each and say which an access key handles |
+| 24 | A role's trusted entity (who may assume it) vs its attached policy (what it may do) | Described the trusted entity as what the role is for; then right in S04-B04 Q2 and Q5 | S04-B04, 2026-11-04 | 1 | Reviewing | Recall on a different day: what does each one decide? |
+| 25 | Credentials Report is account level; Access Advisor is user level and is not an activity log | Described Access Advisor as permissions and the users assigned, and compared it to CloudWatch; then right in S04-B04 Q3 and Q4 | S04-B04, 2026-11-04 | 1 | Reviewing | Recall on a different day: what does each tool show, and at what level? |
+| 26 | Check the real account state instead of assuming (MFA, access keys, password policy) | Predicted wrong in the S04-B04 audit (MFA and keys); assumed a custom password policy existed when only the default applied (S04-B05) | S04-B04, 2026-11-04 | 2 | Open | Before saying a control is in place, check it (credentials report, CLI or console). Track whether it recurs |
 
 *Seeded 2026-10-14 from `PROGRESS.md` and lab Q&A results. Edit anything that doesn't
 match my own sense of where I'm stuck.*
@@ -69,8 +72,12 @@ mapped separately where the exam guide supports it (`WORKFLOW.md`, section 9).
 | S04-B01 | Section 4: IAM & AWS CLI (20 lectures, 57 min; plus a section quiz) | 1. IAM Introduction: Users, Groups, Policies (3:22)<br>2. IAM Users & Groups Hands On (6:23, Udemy hands-on)<br>3. AWS Console Simultaneous Sign-in (1:48) | Explain what IAM users and groups are, why you create them instead of using root, and how to sign in as an IAM user | Task 1.1 (IAM users, groups, roles and policies; applying best practices to IAM and root users) | Complete, logged 2026-10-22 |
 | S04-B02 | Section 4 | 4. IAM Policies (2:50)<br>5. IAM Policies Hands On (8:01, Udemy hands-on)<br>6. IAM MFA Overview (4:10)<br>7. IAM MFA Hands On (4:01, Udemy hands-on) | Explain how policies decide what an identity may do (least privilege) and how MFA proves who it is | Task 1.1 (policy-based authorization, least privilege, MFA on root and IAM users) | Complete, logged 2026-10-26 |
 | S04-B03 | Section 4 | 8. AWS Access Keys, CLI and SDK (4:03)<br>12. AWS CLI Hands On (3:50, Udemy hands-on)<br>14. AWS CloudShell (3:53)<br>Setup videos 9 to 11 (Windows 1:45, Mac OS X 1:28, Linux 1:30) skipped as administrative; the 0:12 CloudShell Region Availability item is a short read | Explain how access keys, the CLI and SDKs let code and people call AWS, and when CloudShell is the easier option | Task 1.2 (application configuration and credentials security, from its knowledge list). Foundations only | Complete, logged 2026-11-03 |
-| S04-B04 | Section 4 | 15. IAM Roles for AWS Services (1:39)<br>16. IAM Roles Hands On (2:05, Udemy hands-on)<br>17. IAM Security Tools (0:54)<br>18. IAM Security Tools Hands On (2:23, Udemy hands-on) | Explain why AWS services use roles instead of stored keys, and which IAM tools show who can do what | Task 1.1 (roles, role-based access, access visibility) | Planned |
-| S04-B05 | Section 4 (section close) | 19. IAM Best Practices (1:29)<br>20. IAM Summary (1:05, wrap-up)<br>IAM & AWS CLI Quiz (Udemy section quiz) | Pull the IAM ideas together as a short best-practices checklist | Task 1.1 (security best practices). Practical to be decided: a read-only self-check of my own account against the checklist | Planned |
+| S04-B04 | Section 4 | 15. IAM Roles for AWS Services (1:39)<br>16. IAM Roles Hands On (2:05, Udemy hands-on)<br>17. IAM Security Tools (0:54)<br>18. IAM Security Tools Hands On (2:23, Udemy hands-on) | Explain why AWS services use roles instead of stored keys, and which IAM tools show who can do what | Task 1.1 (roles, role-based access, access visibility) | Complete, logged 2026-11-11 |
+| S04-B05 | Section 4 (section close) | 19. IAM Best Practices (1:29)<br>20. IAM Summary (1:05, wrap-up)<br>IAM & AWS CLI Quiz (Udemy section quiz) | Pull the IAM ideas together as a short best-practices checklist | Task 1.1 (security best practices). Practical to be decided: a read-only self-check of my own account against the checklist | Complete, logged 2026-11-11 |
+| S05-B01 | Section 5: EC2 Fundamentals (16 lectures, 1 hr 37 min, plus a section quiz) | 1. AWS Budget Setup (5:05, setup: no check; a budget alert already exists)<br>2. EC2 Basics (3:32)<br>3. Create an EC2 Instance with EC2 User Data to have a Website Hands On (13:48, Udemy hands-on)<br>4. EC2 Instance Types Basics (4:51) | Explain what an EC2 instance is and what it is made of, launch one that serves a web page, and choose an instance type for a workload | Task 3.2 (the guide lists selecting compute options and features, such as EC2 instance types) | Planned |
+| S05-B02 | Section 5 | 5. Security Groups & Classic Ports Overview (7:18)<br>6. Security Groups Hands On (4:45, Udemy hands-on)<br>7. SSH Overview (2:47)<br>8. How to SSH using Linux or Mac (7:05, Udemy hands-on)<br>Skipped as not applicable (Mac): How to SSH using Windows (6:08), How to SSH using Windows 10 (5:01) | Explain how security groups control traffic by port and source, and connect to an instance over SSH | Task 1.2 (the guide lists controlling ports, protocols and network traffic, and security groups as VPC security components) | Planned |
+| S05-B03 | Section 5 | 9. SSH Troubleshooting (1:23, read)<br>10. EC2 Instance Connect (3:15)<br>11. EC2 Instance Roles Demo (4:19, Udemy hands-on) | Fix common SSH problems, connect without a key file, and give an instance permissions through a role instead of stored keys | Task 1.1 (roles and role-based access); builds on S04-B04 | Planned |
+| S05-B04 | Section 5 (section close) | 12. EC2 Instance Purchasing Options (9:48)<br>13. Spot Instances & Spot Fleet (8:52)<br>14. EC2 Instances Launch Types Hands On (8:52, Udemy hands-on)<br>EC2 Fundamentals Quiz (Udemy section quiz) | Compare purchasing options by cost, availability and commitment, and pick one for a workload | Task 4.2 (the guide lists AWS purchasing options such as Spot Instances, Reserved Instances and Savings Plans) | Planned |
 
 ### Percipio (previous course, history preserved)
 
@@ -100,6 +107,8 @@ separately.
 
 | Block | Date | First-attempt score | Missed / guessed / assisted concepts (revisit #) | Watched | Practiced | Verified | Independently explained | Time (approx.) | Next review action |
 |---|---|---|---|---|---|---|---|---|---|
+| S04-B05 (Udemy) | 2026-11-10 to 2026-11-11 | 4/5 (single 2/3, multi 2/2), no guesses marked | Q5: tried to use the password policy (and the credentials report) when the question asked how to make a password alone never enough, which is MFA per user (#20, #21). Fresh check right | Yes (2 videos; IAM Summary was the wrap-up with no check; times 1:30, 1:15) | Yes (checklist audit; removed an unused console password; set a custom password policy) | Yes (CLI confirmed the report, the removal and the policy) | Not yet (the question on why removing the console password satisfies the MFA item was not answered) | About 30 to 45 min combined with S04-B04, learner's estimate, including the hands-on work (video times 1:30 and 1:15) | Recall #20, #21, #26 on different days. Notes in `AWS_Course/notes/S04-B05.md` |
+| S04-B04 (Udemy) | 2026-11-03 to 2026-11-04 | 5/5 (single 3/3, multi 2/2), no guesses | No quiz misses. Check gaps: trusted entity vs policy (#24), Access Advisor described backwards and compared to CloudWatch (#25). Audit predictions wrong on MFA and access keys (#26) | Yes (4 of 4 videos; times 1:30, 1:57, 0:50, 2:19) | Yes (created a role for EC2, read the credentials report, reviewed Access Advisor, deleted the test role) | Yes (CLI confirmed the report and the cleanup) | Not yet | About 30 to 45 min combined with S04-B05, learner's estimate, including the hands-on work (video times total 6:36) | Recall #24, #25, #22 on different days. Notes in `AWS_Course/notes/S04-B04.md` |
 | S04-B03 (Udemy) | 2026-10-28 to 2026-11-03 | 5/5 (single 3/3, multi 2/2), no guesses | No quiz misses. Check gaps: purpose of access keys (partial), recommended alternatives answered backwards (#22), authentication vs authorization recall partial (#23) | Yes (3 of 3 videos; times 3:19, about 15 min with the hands-on, 3:50) | Yes (test user, key and named profile; access denied with exit 254; CloudShell watched; key rotation on the CLI user) | Yes (CLI checks after each step; old key deactivated then deleted; one Active key remains) | Not yet (explained in session; confirm at a later recall) | 90 to 120 min, learner's estimate, including the rotation practical and breaks | Recall #22, #23, #16 on different days. Notes in `AWS_Course/notes/S04-B03.md` |
 | S04-B02 (Udemy) | 2026-10-23 to 2026-10-26 | 4/5 (single 2/3, multi 2/2); Q2 partly unsure | Q5: physical vs virtual MFA (#19, then right on a fresh check) and reading the stem (#21). Check gaps: policy parts (#17), inline vs direct (#18), password policy vs MFA (#20). Recall: account alias right (#15) | Yes (4 of 4 videos; times 3:56, about 18 min with the hands-on, 3:20, one untimed) | Yes (policies hands-on; MFA setup followed on my side; cleanup of the extra group and policy) | Yes (CLI: no leftover groups or policies, root MFA on, admin user's policy via group only) | Not yet (explained in session; confirm at a later recall) | 20 to 25 min, learner's estimate. Likely an underestimate: videos 1 to 3 alone were about 25 min | Recall #17 to #21 on different days. Notes in `AWS_Course/notes/S04-B02.md` |
 | S04-B01 (Udemy) | 2026-10-21 to 2026-10-22 | 5/5 (single 3/3, multi 2/2), no guesses | No quiz misses. Check gaps: policies not mentioned, "temporary" access (#16), account alias purpose (#15). Session recall: global vs regional 5 of 6 (#14) | Yes (3 of 3 videos; video 1 timed about 3 min) | Yes (created a user and group, signed in; read-only check of group inheritance) | Yes (console and CLI agree: policy attached via the group, none direct) | Not yet (explained in session; confirm at a later recall) | About 20 to 25 min, learner's estimate, only video 1 timed | Recall #14, #15, #16 on different days. Notes in `AWS_Course/notes/S04-B01.md` |
@@ -118,6 +127,52 @@ One block per logged block, added when it's logged:
 |---|---|---|---|---|---|---|
 | 1 | single / multi (pick N) | ... | ... | ... | right / wrong / partial / guessed | hint used? |
 ```
+
+### S04-B05 IAM best practices and section summary (Udemy, 2026-11-10 to 2026-11-11)
+First-attempt score **4/5** (single-answer 2/3, multi-select 2/2), no guesses marked. Logged 2026-11-11.
+
+| Q | Type | Topic | My answer + reason | Correct answer | First attempt | Notes |
+|---|---|---|---|---|---|---|
+| 1 | single | A shared login with no way to tell who changed something | B: one user per person in groups, so you know who did what | B | right | Per-person users give the traceability; groups give manageable permissions |
+| 2 | multi (pick 2) | IAM cleanup best practices | A, E: permissions on groups; MFA, using the credentials report to find who lacks it | A, E | right | Reasoning sound |
+| 3 | single | A departed contractor's access | C: remove all access to prevent long-term access | C | right | Both the password and the key must go |
+| 4 | multi (pick 2) | A stored key vs a role on EC2 | A, B: a stored key is a long-lived secret; a role is the better practice | A, B | right | Reasoning sound |
+| 5 | single | A password alone must never be enough | B: the credentials report identifies who needs to update their security (picked "require MFA through the password policy") | D | wrong | A password policy cannot require MFA (#20). Reasoning described the report instead of the fix (#21) |
+
+Fresh check after Q5 (not scored): "what can a password policy do" answered B (prevent reuse of old passwords) correctly.
+
+Per-video checks: video 1 recalled root for setup, one user per person, MFA, groups and policies, never share keys; missed the password policy, roles for services and the two audit tools; the purpose of one user per person was first answered as least privilege, then as accountability (the right answer). Video 2 was the wrap-up, with no check.
+
+Checklist audit (read-only, CLI), with predictions: I predicted the password policy and MFA for all console users would be gaps; both were confirmed, and the audit found a third (a CLI user with a direct admin policy). Removed a never-used console password from the CLI user (verified). Set a custom password policy (verified; the settings left minimum length short and users unable to change their own password, which I was told about).
+
+Learner reflection, in my own words (verbatim):
+1. Auditing account credentials
+2. Made predictions on whether cli-admin and Wess had passwords/MFA setup. Pulled a credentials report, reviewed and compared it with my predictions. Also, checked for a password policy.
+3. From the credential report cli-admin has password, after digging deeper the password was never used. i moved forward with removing the password by deactivating it from the security credentials menu. Also there was only a default policy in place so I made a quick password policy.
+4. Getting a solid understanding, there are some area's I need to review, which is why the notes are so important.
+
+### S04-B04 IAM roles and IAM security tools (Udemy, 2026-11-03 to 2026-11-04)
+First-attempt score **5/5** (single-answer 3/3, multi-select 2/2), no guesses marked. Logged 2026-11-11.
+
+| Q | Type | Topic | My answer + reason | Correct answer | First attempt | Notes |
+|---|---|---|---|---|---|---|
+| 1 | single | An EC2 app reading S3 with no stored key | D: a role with S3 read permissions | D | right | Reasoning sound |
+| 2 | multi (pick 2) | Trusted entity vs policy | A, C: trusted entity says who may assume it; the policy says what it can do | A, C | right | Stated the split cleanly |
+| 3 | single | One file with every user's MFA status | B: the credentials report | B | right | Reasoning sound |
+| 4 | multi (pick 2) | Least privilege with Access Advisor | B, D: see last-accessed services, then build a narrower policy | B, D | right | Refined: the last-accessed data is what tells you what to trim |
+| 5 | single | A role an instance cannot use | A: EC2 was not the trusted entity | A | right | Reasoning sound |
+
+Per-video checks: video 1 recalled roles as identities for services (said an instance runs Lambda and CloudFormation; each has its own role); asked whether a role holds several policies (checked against the AWS docs: default 20, maximum 25). Video 2 recalled the creation steps but skipped the trusted entity; its purpose was described as what the role is for (#24). Video 3 recalled the credentials report; described Access Advisor backwards and compared it to CloudWatch (#25); the least-privilege link was right. Video 4 recalled the report columns generally and its purpose well.
+
+Audit practical (read-only, CLI), with predictions: predicted both users had MFA and an access key. The report showed the CLI user had no MFA and the console user had no key (#26). Deleted the test role and verified. An old unused role from an earlier project remains and is for a later cleanup.
+
+Learner reflection, in my own words (verbatim):
+1. Best practices for assign services to roles and managing permissions. Along with account auditing to ensure accout security and permissions management
+2. Created an IAM role attached a service and permission and assigned the role to a user. Also downloaded a credentials report from the IAM Credentials option and reviewed a the IAM Access Advisor.
+3. We tested commands before and after removing user for IAM roles and got an error from the list command when removed. Downloaded a IAM credentials report and learned my perdicitions of accounts that had passwords/MFA setup was innaccurate. Also, review Access Advisor to so we what services that was last access from my user account.
+4. I have a solid understanding nothing is to fuzzy. All of the hands-on work helps to connect the learning course content. Should I remove the cli-admin pass with that affect anything or should I mfa it?
+
+Accuracy notes on this reflection (not edits to it): the role was not assigned to a user (it was created for the EC2 service and never used); the before-and-after-removal commands were from the S04-B03 key exercise; the predictions that were wrong were MFA and access keys.
 
 ### S04-B03 Access keys, the CLI and SDK, and CloudShell (Udemy, 2026-10-28 to 2026-11-03)
 First-attempt score **5/5** (single-answer 3/3, multi-select 2/2), no guesses marked. Logged 2026-11-03.
@@ -241,6 +296,8 @@ Four separate statuses (`WORKFLOW.md`, section 5): Watched, Practiced, Verified,
 
 | Block | Exercise | Type (Udemy lesson / lab reuse / extension / new / design) | Where (folder) | Practiced | Verified | Independently explained | Guided or independent | Cleanup | Unresolved |
 |---|---|---|---|---|---|---|---|---|---|
+| S04-B05 | Checklist audit of my own account against the IAM best practices (read-only), then removed a never-used console password and set a custom password policy | Read-only audit plus two small real fixes | None (no files; study notes in `AWS_Course/notes/S04-B05.md`) | Yes | Yes (CLI confirmed the removal and the policy) | Not yet | Guided | Nothing created to delete | The password policy is weak (short minimum length, users cannot change their own password) |
+| S04-B04 | Udemy hands-on (create a role for EC2, credentials report, Access Advisor), plus a predict-then-check audit of my own account (read-only) and deletion of the test role | Udemy hands-on lessons plus a read-only audit | None (no files; study notes in `AWS_Course/notes/S04-B04.md`) | Yes | Yes (CLI confirmed the report and the cleanup) | Not yet | Guided | Test role and its instance profile deleted and verified; the credentials-report CSV deleted | An old unused role from an earlier project remains |
 | S04-B03 | Udemy hands-on (CLI with a test user's key, named profile, access denied), CloudShell watched, then key rotation on the CLI user as an admin IAM user (extension of the key lesson) | Udemy hands-on lesson plus a real-world extension | None (no files; study notes in `AWS_Course/notes/S04-B03.md`) | Yes | Yes (CLI at each step; only one Active key remains) | Not yet | Guided | Test user, key, profile and key files removed; old key deactivated then deleted; screenshots reviewed and clean | Why alternatives to long-lived keys exist (#22); authentication vs authorization (#23) |
 | S04-B02 | Udemy hands-ons (policies and MFA), then read-only CLI verification of the cleanup (no leftover test group or policy, root MFA on) | Udemy hands-on lessons plus a read-only verification | None (no files; study notes in `AWS_Course/notes/S04-B02.md`) | Yes | Yes (CLI) | Not yet | Guided | The extra group and policy were deleted before verification; nothing new created | Policy parts and inline vs direct (#17, #18); a custom password policy is not set (optional) |
 | S04-B01 | Udemy hands-on (create a user and group, sign in), then a predict-then-check on my own account: is the admin policy attached directly or via the group (read-only, $0) | Udemy hands-on lesson plus a read-only verification | None (no files; study notes in `AWS_Course/notes/S04-B01.md`) | Yes | Yes (console and CLI agree) | Not yet | Guided | Nothing to delete; the user and group are kept as my real admin setup. All-region billable sweep clean 2026-10-22 | Why a group edit affects every member; account alias purpose (#15) |
@@ -256,6 +313,7 @@ parked here.
 |---|---|---|---|
 | Edge locations and Local Zones, and whether they matter when choosing a Region | S03-B01, my own question | Edge locations are not a Region-choice factor; Local Zones put a Region closer to big cities for latency. Details not yet taught | The instructor says edge locations come in the global section, around the middle of the course |
 | Multi-account strategies (many accounts for test, production and so on) | S04-B01, multi-session support video | Multi-session support makes switching between accounts easy; how companies organize many accounts is not yet taught | Later in the course, not yet identified |
+| CloudTrail and other monitoring and logging tools | S04-B05, noted as supplemental | The record of who made which API call is CloudTrail; CloudWatch is metrics and alarms. Not yet taught | The monitoring section |
 | IAM Identity Center and the CLI with temporary credentials | S04-B03, console key recommendations | The console recommends it instead of long-lived keys; not yet taught | Not yet identified (roles come first, in S04-B04) |
 | Resource-based policies (such as S3 bucket policies) and explicit Deny overriding Allow | S04-B02, policy structure video | Identity-based policies omit Principal and resource-based ones include it; an explicit Deny wins. Mentioned as supplemental only | Likely the S3 section |
 
@@ -280,6 +338,9 @@ Where to pick up if a block was interrupted.
 
 - **2026-10-26, optional:** set a custom password policy (raise the minimum length and require character types). Do not turn on expiration with administrator reset while one console admin exists, or I could lock myself out.
 
+- **2026-11-11, updated:** the CLI user's console password was removed and a custom password policy was set. Still open: strengthen the password policy (longer minimum, require numbers, let users change their own password, prevent reuse), replace the CLI user's direct admin policy with a narrower one in lab 08, add a second kind of MFA, and review the old unused role from the August project.
+- **2026-11-11, exam pacing decision pending:** see Exam pacing.
+
 ## Exam pacing
 
 | Item | Value |
@@ -288,10 +349,12 @@ Where to pick up if a block was interrupted.
 | Percipio listed duration (previous course) | 32 h 35 min (21 courses = 30 h 25 min, plus 3 other items = 2 h 10 min). Listed video time, not total study time |
 | Udemy course duration | Not yet known; comes from the section screenshots |
 | Pace preference | 1.5 to 2 blocks per day, flexible, not a minimum |
-| First-pass finish | Re-estimate after the first two Udemy blocks. The earlier Nov 7 to 10 target was set for the Percipio course length and no longer stands |
+| First-pass finish | The earlier Nov 7 to 10 target was set for the Percipio course length, has passed, and no longer stands. Checked 2026-11-11: about 1 h 10 min of Udemy video covered in about 3 weeks (6 blocks) against roughly 27 h of course video (read from a small screenshot), with 9 days to the exam. Finishing the course by Nov 20 is not realistic at any observed pace |
+| Exam pacing decision | **Decided 2026-11-11: move the exam date out** for more breathing room. The new date is **not yet set**; 2026-11-20 stays recorded until it is. Once a date is set, re-estimate the remaining workload from the 6 blocks done so far |
 | Days from 2026-10-15 to Nov 7 / Nov 10 / Nov 20 | 23 / 26 / 36 |
 | Observed time per block | Percipio M01-B01: not recorded. **Udemy S03-B01: about 30 to 40 min, estimated and not timed** (videos about 8.5 min at 1.5x and 1.25x, review about 20 to 30 min). Time the next block with a phone timer to get a measured number |
 | Udemy S04-B01 | About 20 to 25 min, learner's estimate, only video 1 timed. Listed video time is 11:33 plus checks, quiz, practical and reflection, so this is probably an underestimate |
+| Udemy S04-B04 and S04-B05 | About 30 to 45 min for both blocks combined, learner's estimate, including the hands-on work. Video watch times: S04-B04 6:36 (1:30, 1:57, 0:50, 2:19), S04-B05 2:45 (1:30, 1:15) |
 | Udemy S04-B03 | 90 to 120 min, learner's estimate. Includes the rotation practical and breaks; listed video time is about 11 min |
 | Udemy S04-B02 | 20 to 25 min, learner's estimate. Likely an underestimate: videos 1 to 3 alone were about 25 min (one video 18 min with the hands-on), plus the checks, quiz, practical and reflection |
 | Udemy pace so far | Four blocks, all estimated and not fully timed (S03-B01 about 30 to 40 min, S04-B01 about 20 to 25 min, S04-B02 about 20 to 25 min, S04-B03 about 90 to 120 min with the rotation practical). The earlier ones are likely low, and S04-B03 includes an unplanned extension. Not enough to project the course. Needs the course's total video minutes and one properly timed block |
@@ -305,13 +368,13 @@ Where to pick up if a block was interrupted.
 | Metric | Value |
 |---|---|
 | Percipio modules completed | 0 |
-| Udemy blocks completed | 4 |
+| Udemy blocks completed | 6 |
 | Blocks completed | 1 |
-| Questions answered (first attempt) | 25 (Percipio 5, Udemy 20) |
-| Overall first-attempt accuracy | 21/25 (84%); Udemy so far 19/20 |
-| Single-answer accuracy | 13/15 (87%) |
-| Multi-select accuracy | 8/10 (80%) |
+| Questions answered (first attempt) | 35 (Percipio 5, Udemy 30) |
+| Overall first-attempt accuracy | 30/35 (86%); Udemy so far 28/30 |
+| Single-answer accuracy | 18/21 (86%) |
+| Multi-select accuracy | 12/14 (86%) |
 | Blocks under 4/5 | 1 (M01-B01) |
 | Open revisit items | 10 |
-| Reviewing | 13 |
+| Reviewing | 16 |
 | Solid | 0 |

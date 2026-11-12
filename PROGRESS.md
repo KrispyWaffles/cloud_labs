@@ -234,12 +234,29 @@ any lab touching EC2/RDS/NAT Gateway.
 - New revisit item #22 (alternatives to long-lived keys); #23 (authentication vs authorization) added
   at Reviewing. Time about 90 to 120 min, estimated, including the rotation.
 
+## 2026-11-03 to 11-11 — Udemy S04-B04 and S04-B05 (IAM roles, security tools, best practices)
+
+- **S04-B04** (roles, Credentials Report, Access Advisor): **5/5**. A read-only audit of my own account
+  with predictions: I predicted MFA and access keys wrong, which is the lesson in using real data.
+  Deleted the test role and verified.
+- **S04-B05** (IAM best practices, summary): **4/5**. The miss: tried to use the password policy
+  (and the report) when the question asked how to make a password alone never enough (MFA per user);
+  a fresh check afterwards was right. Revisit #20 now has 2 misses.
+- **Real fixes from the audit:** removed a never-used console password from the CLI user, and set a
+  custom password policy (still weak; strengthening is optional and pending).
+- New revisit items #24 to #26; #16 moved to Reviewing. Block times are pending.
+- Section 4 (IAM & AWS CLI) is complete. Planned Section 5 (EC2 Fundamentals) into four blocks.
+- **Pacing:** about 1 h 10 min of Udemy video in about 3 weeks against roughly 27 h, with 9 days to
+  the exam on Nov 20. Finishing the course by then is not realistic. **Decision (2026-11-11): move the
+  exam date out.** The new date is not set yet, so Nov 20 stays recorded until it is. Block time for
+  S04-B04 and S04-B05 combined: about 30 to 45 min (estimate).
+
 ## Next up
 
-0. S04-B04 (IAM Roles for AWS Services, Roles Hands On, IAM Security Tools, Security Tools Hands On).
-   Heads-up first: create the role for a test purpose only, attach the narrowest policy (never
-   AdministratorAccess), and delete it afterward. Time the block with a phone timer. Also push any
-   unpushed commits.
+0. Set the new exam date (the move is decided, the date is not). Then S05-B01 (Budget Setup, EC2 Basics,
+   Create an EC2 Instance with User Data, EC2 Instance Types Basics). Heads-up first: EC2 costs money,
+   open only what the lesson needs, terminate afterward, and run the all-region sweep. Time the block
+   with a phone timer. Push any unpushed commits.
 1. Start the next session with delayed recall: explain what makes a subnet public,
    before seeing any notes.
 2. One concept: what a NAT gateway does to the source address of an outgoing request,
